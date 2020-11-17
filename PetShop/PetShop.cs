@@ -20,10 +20,23 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
-            if (!_petsInTheStore.Contains(newPet))
+            if (!_petsInTheStore.Contains(newPet) && !IsNameAlreadyTaken(newPet.name))
             {
                 this._petsInTheStore.Add(newPet);
             }
+        }
+
+        private bool IsNameAlreadyTaken(string name)
+        {
+            foreach (var pet in _petsInTheStore)
+            {
+                if (pet.name == name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
