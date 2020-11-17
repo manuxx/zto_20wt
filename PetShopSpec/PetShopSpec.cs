@@ -99,7 +99,7 @@ namespace Training.Spec
         Because b = () =>
         {
             IEnumerable<Pet> returned_pets = subject.AllPets();
-            exception = Catch.Exception(() => { var x = (ICollection<Pet>)returned_pets; });
+            exception = Catch.Exception(() => { var x = (ICollection<Pet>) returned_pets; });
         };
         private static IEnumerable<Pet> returned_collection_of_pets;
         private static Exception exception;
