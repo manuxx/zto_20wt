@@ -22,6 +22,12 @@ namespace Training.DomainClasses
             if (newPet == null || this._petsInTheStore.Contains(newPet))
                 return;
 
+            foreach (var pet in _petsInTheStore)
+            {
+                if (pet.name.Equals(newPet.name))
+                    return;
+            }
+
             this._petsInTheStore.Add(newPet);
         }
     }
