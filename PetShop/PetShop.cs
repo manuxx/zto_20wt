@@ -28,15 +28,7 @@ namespace Training.DomainClasses
 
         private bool IsPetAlreadyInTheStore(Pet newPet)
         {
-            foreach (var pet in _petsInTheStore)
-            {
-                if (pet.name == newPet.name)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return _petsInTheStore.Contains(newPet);
         }
     }
 }
