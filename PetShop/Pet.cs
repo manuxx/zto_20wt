@@ -39,25 +39,5 @@ namespace Training.DomainClasses
         public int yearOfBirth { get; set; }
         public float price { get; set; }
         public Species species { get; set; }
-
-        public bool Equals(Pet other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return name == other.name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Pet) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return (name != null ? name.GetHashCode() : 0);
-        }
     }
 }
