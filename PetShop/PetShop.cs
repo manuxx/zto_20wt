@@ -19,6 +19,7 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
+            if (newPet != null) _petsInTheStore.Add(newPet);
         }
     }
 }
