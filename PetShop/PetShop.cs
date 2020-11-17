@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
 
 namespace Training.DomainClasses
@@ -20,6 +21,10 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
+            if (_petsInTheStore.Contains(newPet))
+            {
+                return;
+            }
             _petsInTheStore.Add(newPet);
         }
     }
