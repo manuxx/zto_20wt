@@ -19,7 +19,7 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
-            if (newPet == null)
+            if (newPet == null || this._petsInTheStore.Contains(newPet))
                 return;
 
             this._petsInTheStore.Add(newPet);
