@@ -56,7 +56,7 @@ namespace Training.Spec
 
         private static Pet pet;
     }
-    [Ignore("this will be implemented 2nd")]
+
     [Subject(typeof(PetShop))]
     public class when_adding_an_existing_pet_again_ : pet_shop_concern
     {
@@ -74,7 +74,7 @@ namespace Training.Spec
         private static Pet pet;
     }
 
-    [Ignore("this will be implemented 3rd")]
+
     [Subject(typeof (PetShop))]
     public class when_adding_a_new_pet_with_existing_name_ : pet_shop_concern
     {
