@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace Training.DomainClasses
 {
@@ -19,6 +20,7 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
+            _petsInTheStore.Add(newPet);
         }
     }
 }
