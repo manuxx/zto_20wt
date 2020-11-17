@@ -19,6 +19,12 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
+            foreach (Pet p in _petsInTheStore)
+            {
+                if (p.name == newPet.name)
+                    return;
+            }
+            _petsInTheStore.Add(newPet);
         }
     }
 }
