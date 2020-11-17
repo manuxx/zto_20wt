@@ -20,7 +20,7 @@ namespace Training.DomainClasses
 
         public void Add(Pet newPet)
         {
-            if (!_petsInTheStore.Contains(newPet) && !_petsInTheStore.Any(p => p.name == newPet.name))
+            if (!_petsInTheStore.Contains(newPet))
             {
                 this._petsInTheStore.Add(newPet);
             }
