@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security;
 
 namespace Training.DomainClasses
 {
-    public class PetShop
+    public partial class PetShop
     {
         private IList<Pet> _petsInTheStore;
 
@@ -17,27 +14,7 @@ namespace Training.DomainClasses
         public IEnumerable<Pet> AllPets()
         {
             //return _petsInTheStore.OneAtATime();
-            return new ReadOnlySet<Pet>(_petsInTheStore);
-        }
-
-        public class ReadOnlySet<TItem> : IEnumerable<TItem>
-        {
-            private readonly IEnumerable<TItem> _petsInTheStore;
-
-            public ReadOnlySet(IList<TItem> petsInTheStore)
-            {
-                _petsInTheStore = petsInTheStore;
-            }
-
-            public IEnumerator<TItem> GetEnumerator()
-            {
-                return _petsInTheStore.GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
+            return new ReadOnly<Pet>(_petsInTheStore);
         }
 
         public void Add(Pet newPet)

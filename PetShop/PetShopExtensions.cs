@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 
-namespace Training.DomainClasses
+static internal class PetShopExtensions
 {
-    static internal class PetShopExtensions
+    public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> items)
     {
-        public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> petsInTheStore)
+        foreach (var item in items)
         {
-            foreach (var pet in petsInTheStore)
-            {
-                yield return pet;
-            }
+            yield return item;
         }
     }
 }
