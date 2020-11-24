@@ -206,7 +206,7 @@ namespace Training.Spec
 
     class when_sorting_pets : concern_with_pets_for_sorting_and_filtering
     {
-        [Ignore("Will be implemented next")]
+        //[Ignore("Will be implemented next")]
         It should_be_able_to_sort_by_name_ascending = () =>
         {
             var result = subject.AllPetsSortedByName();

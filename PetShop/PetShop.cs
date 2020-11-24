@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Training.DomainClasses
@@ -23,6 +24,31 @@ namespace Training.DomainClasses
                 if (pet.name == newPet.name)
                     return;
             _petsInTheStore.Add(newPet);
+        }
+
+        public IEnumerable<Pet> AllCats()
+        {
+            foreach (var pet in _petsInTheStore)
+            {
+                if (pet.species == Species.Cat)
+                {
+                    yield return pet;
+                }
+            }
+        }
+
+        public IEnumerable<Pet> AllPetsSortedByName()
+        {
+            SortedList sorted = new SortedList();
+            foreach (var pet in _petsInTheStore)
+            {
+                sorted.Add(pet.name,pet);
+            }
+
+            foreach (DictionaryEntry entry in sorted)
+            {
+                yield return (Pet)entry.Value;
+            }
         }
     }
 }
