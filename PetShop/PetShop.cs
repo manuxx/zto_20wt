@@ -30,7 +30,6 @@ namespace Training.DomainClasses
             sortedPets.Sort((p1,p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
         }
-
         public IEnumerable<Pet> AllCats()
         {
             foreach (var pet in _petsInTheStore)
@@ -41,6 +40,7 @@ namespace Training.DomainClasses
                 }
             }
         }
+
     }
 
 }
