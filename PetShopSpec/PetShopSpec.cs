@@ -105,7 +105,5 @@ namespace Training.Spec
         private static Exception exception;
         It invalid_cast_exception_should_be_thrown = () => exception.ShouldBeOfExactType<InvalidCastException>();
     }
-
-
 }
 
