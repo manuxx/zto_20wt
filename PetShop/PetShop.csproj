@@ -42,6 +42,7 @@
     <Compile Include="EnviromentType.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetShop.cs" />
+    <Compile Include="PetShopExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="Sex.cs" />
