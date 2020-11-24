@@ -30,17 +30,43 @@ namespace Training.DomainClasses
             sortedPets.Sort((p1,p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
         }
-        public IEnumerable<Pet> AllCats()
+        private IEnumerable<Pet> FindPets(Predicate<Pet> predicate)
         {
             foreach (var pet in _petsInTheStore)
             {
-                if (pet.species == Species.Cat)
+                if (predicate(pet))
                 {
                     yield return pet;
                 }
             }
         }
 
+        public IEnumerable<Pet> AllMice()
+            => FindPets((Pet pet) => pet.species == Species.Mouse);
+
+        public IEnumerable<Pet> AllCats()
+            => FindPets((Pet pet) => pet.species == Species.Cat);
+
+        public IEnumerable<Pet> AllFemalePets()
+            => FindPets((Pet pet) => pet.sex == Sex.Female);
+
+        public IEnumerable<Pet> AllCatsOrDogs()
+            => FindPets((Pet pet) => pet.species == Species.Dog || pet.species == Species.Cat);
+
+        public IEnumerable<Pet> AllPetsButNotMice()
+            => FindPets((Pet pet) => pet.species != Species.Mouse);
+
+        public IEnumerable<Pet> AllMaleDogs()
+            => FindPets((Pet pet) => pet.species == Species.Dog && pet.sex == Sex.Male);
+
+        public IEnumerable<Pet> AllPetsBornAfter2010()
+            => FindPets((Pet pet) => pet.yearOfBirth > 2010);
+
+        public IEnumerable<Pet> AllDogsBornAfter2010()
+            => FindPets((Pet pet) => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
+
+        public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
+            => FindPets((Pet pet) => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
     }
 
 }
