@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -26,25 +25,6 @@ namespace Training.DomainClasses
                 if (pet.name == newPet.name)
                     return;
             _petsInTheStore.Add(newPet);
-        }
-    }
-
-    public class ReadOnlySet<TItem> : IEnumerable<TItem>
-    {
-        private readonly IEnumerable<TItem> _pets;
-        public ReadOnlySet(IList<TItem> petsInTheStore)
-        {
-            _pets = petsInTheStore;
-        }
-
-        public IEnumerator<TItem> GetEnumerator()
-        {
-            return _pets.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

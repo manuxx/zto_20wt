@@ -1,13 +1,12 @@
 using System.Collections.Generic;
-using Training.DomainClasses;
 
 internal static class PetShopExtensions
 {
-    public static IEnumerable<T> Immutabilize<T>(this IList<T> pets)
+    public static IEnumerable<T> Immutabilize<T>(this IList<T> items)
     {
-        foreach (var pet in pets)
+        foreach (var item in items)
         {
-            yield return pet;
+            yield return item;
         }
     }
 }
