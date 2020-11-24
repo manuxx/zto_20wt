@@ -4,11 +4,11 @@ namespace Training.DomainClasses
 {
     static internal class PetShopExtensions
     {
-        public static IEnumerable<T> ToImmutableCollection<T>(this IEnumerable<T> pets)
+        public static IEnumerable<T> ToImmutableCollection<T>(this IEnumerable<T> items)
         {
-            foreach (var pet in pets)
+            foreach (var item in items)
             {
-                yield return pet;
+                yield return item;
             }
         }
     }
