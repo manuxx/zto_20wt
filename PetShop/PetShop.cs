@@ -49,7 +49,6 @@ namespace Training.DomainClasses
 
     public class PetNameComparer : Comparer<Pet>
     {
-        // Compares by Length, Height, and Width.
         public override int Compare(Pet x, Pet y)
         {
             return x.name.CompareTo(y.name);
