@@ -1,7 +1,0 @@
-lab1:
-
-kostrzebski ++
-szreter+
-okulski+
-FROELKE+
-MALECKI+
