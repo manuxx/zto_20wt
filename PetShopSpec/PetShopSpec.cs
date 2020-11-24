@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PetShopSpec.Utilities;
 using Training.DomainClasses;
 using Machine.Specifications;
 using Machine.Specifications.AutoMocking.Rhino;
