@@ -39,16 +39,8 @@ namespace Training.DomainClasses
         public IEnumerable<Pet> AllPetsSortedByName()
         {
             List<Pet> sortedPets = new List<Pet>(_petsInTheStore);
-            sortedPets.Sort(new PetNameComparer());
+            sortedPets.Sort((p1, p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
-        }
-
-        public class PetNameComparer : IComparer<Pet>
-        {
-            public int Compare(Pet x, Pet y)
-            {
-                return x.name.CompareTo(y.name);
-            }
         }
     }
 }
