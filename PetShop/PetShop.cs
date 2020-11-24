@@ -43,42 +43,42 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.species == Species.Mouse);
         }
 
         public IEnumerable<Pet> AllFemalePets()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.sex == Sex.Female);
         }
 
         public IEnumerable<Pet> AllCatsOrDogs()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.species == Species.Cat || x.species == Species.Dog);
         }
 
         public IEnumerable<Pet> AllPetsButNotMice()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.species != Species.Mouse);
         }
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.yearOfBirth > 2010);
         }
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.species == Species.Dog && x.yearOfBirth > 2010);
         }
 
         public IEnumerable<Pet> AllMaleDogs()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.species == Species.Dog && x.sex == Sex.Male);
         }
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.AllThatPassCondition(x => x.species == Species.Rabbit || x.yearOfBirth > 2011);
         }
     }
 
