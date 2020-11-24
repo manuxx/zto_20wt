@@ -6,16 +6,16 @@ namespace Training.DomainClasses
 {
     public class ReadOnlySet<TItem> : IEnumerable<TItem>
     {
-        private readonly IEnumerable<TItem> _pets;
+        private readonly IEnumerable<TItem> _items;
 
-        public ReadOnlySet(IEnumerable<TItem> pets)
+        public ReadOnlySet(IEnumerable<TItem> items)
         {
-            _pets = pets;
+            _items = items;
         }
 
         public IEnumerator<TItem> GetEnumerator()
         {
-            return _pets.GetEnumerator();
+            return _items.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
