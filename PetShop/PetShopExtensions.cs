@@ -3,7 +3,7 @@ using Training.DomainClasses;
 
 static internal class PetShopExtensions
 {
-    public static IEnumerable<TItem> OneAtATime<TItem>(IEnumerable<TItem> pets)
+    public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> pets)
     {
         foreach (var pet in pets)
         {
