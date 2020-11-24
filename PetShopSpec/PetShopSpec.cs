@@ -7,7 +7,7 @@ using Machine.Specifications.AutoMocking.Rhino;
 
 namespace Training.Spec
 {
-    public abstract class pet_shop_concern :  Specification<PetShop>
+    public abstract class pet_shop_concern :  Specification<DomainClasses.PetShop>
     {
         Establish context = () =>
         {
@@ -17,7 +17,7 @@ namespace Training.Spec
         protected static IList<Pet> pet_initial_content;
     }
     
-    [Subject(typeof(PetShop))]
+    [Subject(typeof(DomainClasses.PetShop))]
     public class when_counting_pets_in_the_shop : pet_shop_concern
     {
         Establish context = () => pet_initial_content.AddManyItems(new Pet(), new Pet()); 
@@ -27,7 +27,7 @@ namespace Training.Spec
             number_of_pets.ShouldEqual(2); 
     }
 
-    [Subject(typeof (PetShop))]
+    [Subject(typeof (DomainClasses.PetShop))]
     public class when_asking_for_all_pets : pet_shop_concern
     {
         Establish context = () => 
@@ -45,7 +45,7 @@ namespace Training.Spec
         private static IEnumerable<Pet> pets_in_shop;
     }
 
-    [Subject(typeof(PetShop))]
+    [Subject(typeof(DomainClasses.PetShop))]
     public class when_adding_a_new_pet : pet_shop_concern
     {
         Establish context = () => pet = new Pet();
@@ -57,7 +57,7 @@ namespace Training.Spec
         private static Pet pet;
     }
 
-    [Subject(typeof(PetShop))]
+    [Subject(typeof(DomainClasses.PetShop))]
     public class when_adding_an_existing_pet_again_ : pet_shop_concern
     {
         Establish context = () =>
@@ -75,7 +75,7 @@ namespace Training.Spec
     }
 
 
-    [Subject(typeof (PetShop))]
+    [Subject(typeof (DomainClasses.PetShop))]
     public class when_adding_a_new_pet_with_existing_name_ : pet_shop_concern
     {
         Establish context = () =>
@@ -92,7 +92,7 @@ namespace Training.Spec
         private static Pet fluffy_the_second;
     }
 
-    [Subject(typeof(PetShop))]
+    [Subject(typeof(DomainClasses.PetShop))]
     class when_trying_to_change_returned_collection_of_pets : pet_shop_concern
     {
         Establish c = () => pet_initial_content.AddManyItems(new Pet { name = "Pixie" }, new Pet { name = "Dixie" });
@@ -206,7 +206,6 @@ namespace Training.Spec
 
     class when_sorting_pets : concern_with_pets_for_sorting_and_filtering
     {
-        [Ignore("Will be implemented next")]
         It should_be_able_to_sort_by_name_ascending = () =>
         {
             var result = subject.AllPetsSortedByName();
