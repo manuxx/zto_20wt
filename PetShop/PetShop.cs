@@ -17,7 +17,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPets()
         {
-            return new ReadOnlySet(_petsInTheStore);
+            return new ReadOnlySet<Pet>(_petsInTheStore);
         }
 
         public void Add(Pet newPet)
@@ -29,20 +29,17 @@ namespace Training.DomainClasses
         }
     }
 
-    public class ReadOnlySet : IEnumerable<Pet>
+    public class ReadOnlySet<TItem> : IEnumerable<TItem>
     {
-        private IEnumerable<Pet> pets;
-        public ReadOnlySet(IList<Pet> petsInTheStore)
+        private readonly IEnumerable<TItem> _pets;
+        public ReadOnlySet(IList<TItem> petsInTheStore)
         {
-            pets = petsInTheStore;
+            _pets = petsInTheStore;
         }
 
-        public IEnumerator<Pet> GetEnumerator()
+        public IEnumerator<TItem> GetEnumerator()
         {
-            foreach (var pet in pets)
-            {
-                yield return pet;
-            }
+            return _pets.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
