@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Training.DomainClasses
 {
@@ -32,15 +33,51 @@ namespace Training.DomainClasses
         }
         public IEnumerable<Pet> AllCats()
         {
-            foreach (var pet in _petsInTheStore)
-            {
-                if (pet.species == Species.Cat)
-                {
-                    yield return pet;
-                }
-            }
+            return _petsInTheStore.AllPetsBySpecie(Species.Cat);
         }
 
+        public IEnumerable<Pet> AllMice()
+        {
+
+            return _petsInTheStore.AllPetsBySpecie(Species.Mouse);
+        }
+
+        public IEnumerable<Pet> AllFemalePets()
+        {
+            return _petsInTheStore.AllPetsBySex(Sex.Female);
+        }
+
+        public IEnumerable<Pet> AllCatsOrDogs()
+        {
+            return _petsInTheStore.AllPetsBySpecie(Species.Cat)
+                .Concat(_petsInTheStore.AllPetsBySpecie(Species.Dog));
+        }
+
+        public IEnumerable<Pet> AllPetsButNotMice()
+        {
+            return _petsInTheStore.AllPetsWithoutSpecie(Species.Mouse);
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2010()
+        {
+            return _petsInTheStore.AllPetsBornAfter(2010);
+        }
+
+        public IEnumerable<Pet> AllDogsBornAfter2010()
+        {
+            return _petsInTheStore.AllPetsBySpecie(Species.Dog).AllPetsBornAfter(2010);
+        }
+
+        public IEnumerable<Pet> AllMaleDogs()
+        {
+            return _petsInTheStore.AllPetsBySex(Sex.Male).AllPetsBySpecie(Species.Dog);
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
+        {
+            return _petsInTheStore.AllPetsBornAfter(2011)
+                .Concat(_petsInTheStore.AllPetsBySpecie(Species.Rabbit));
+        }
     }
 
 }
