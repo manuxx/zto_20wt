@@ -38,7 +38,9 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsSortedByName()
         {
-            throw new NotImplementedException();
+            var sortedList = new List<Pet>(_petsInTheStore);
+            sortedList.Sort(((pet1, pet2) => pet1.name.CompareTo(pet2.name)));
+            return sortedList;
         }
     }
 }
