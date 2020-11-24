@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Training.DomainClasses;
 
 static internal class PetShopExtensions
 {
