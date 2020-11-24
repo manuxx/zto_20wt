@@ -29,18 +29,15 @@ namespace Training.DomainClasses
 
     public class ReadOnlySet<T> : IEnumerable<T>
     {
-        private IList<T> _items;
-        public ReadOnlySet(IList<T> items)
+        private readonly IEnumerable<T> _items;
+        public ReadOnlySet(IEnumerable<T> items)
         {
             _items = items;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var item in _items)
-            {
-                yield return item;
-            }
+            return _items.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
