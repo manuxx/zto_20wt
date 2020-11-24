@@ -14,7 +14,8 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPets()
         {
-            return _petsInTheStore;
+            //foreach (var pet1 in OneAtATime()) yield return pet1;
+            return _petsInTheStore.OneAtATime();
         }
 
         public void Add(Pet newPet)
