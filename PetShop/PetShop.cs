@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Security;
 
 namespace Training.DomainClasses
 {
@@ -14,7 +17,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPets()
         {
-            return _petsInTheStore.Immutabilize();
+            return new ReadOnlySet(_petsInTheStore);
         }
 
         public void Add(Pet newPet)
@@ -23,6 +26,28 @@ namespace Training.DomainClasses
                 if (pet.name == newPet.name)
                     return;
             _petsInTheStore.Add(newPet);
+        }
+    }
+
+    public class ReadOnlySet : IEnumerable<Pet>
+    {
+        private IEnumerable<Pet> pets;
+        public ReadOnlySet(IList<Pet> petsInTheStore)
+        {
+            pets = petsInTheStore;
+        }
+
+        public IEnumerator<Pet> GetEnumerator()
+        {
+            foreach (var pet in pets)
+            {
+                yield return pet;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
