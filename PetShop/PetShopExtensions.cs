@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 static internal class PetShopExtensions
@@ -7,6 +8,17 @@ static internal class PetShopExtensions
         foreach (var item in items)
         {
             yield return item;
+        }
+    }
+
+    public static IEnumerable<TItem> FindMatchedItems<TItem>(this IEnumerable<TItem> items, Predicate<TItem> predicate)
+    {
+        foreach (var item in items)
+        {
+            if (predicate(item))
+            {
+                yield return item;
+            }
         }
     }
 }
