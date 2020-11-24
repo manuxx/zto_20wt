@@ -32,15 +32,59 @@ namespace Training.DomainClasses
         }
         public IEnumerable<Pet> AllCats()
         {
+            return AllByPredicate(pet => pet.species == Species.Cat);
+        }
+
+        private IEnumerable<Pet> AllByPredicate(Predicate<Pet> filter)
+        {
             foreach (var pet in _petsInTheStore)
             {
-                if (pet.species == Species.Cat)
+                if (filter(pet))
                 {
                     yield return pet;
                 }
             }
         }
 
+        public IEnumerable<Pet> AllMice()
+        {
+            return AllByPredicate(pet => pet.species == Species.Mouse);
+        }
+
+        public IEnumerable<Pet> AllFemalePets()
+        {
+            return AllByPredicate(pet => pet.sex == Sex.Female);
+        }
+
+        public IEnumerable<Pet> AllCatsOrDogs()
+        {
+            return AllByPredicate(pet => pet.species == Species.Cat || pet.species == Species.Dog);
+        }
+
+        public IEnumerable<Pet> AllPetsButNotMice()
+        {
+            return AllByPredicate(pet => pet.species != Species.Mouse);
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2010()
+        {
+            return AllByPredicate(pet => pet.yearOfBirth > 2010);
+        }
+
+        public IEnumerable<Pet> AllDogsBornAfter2010()
+        {
+            return AllByPredicate(pet => pet.species == Species.Dog && pet.yearOfBirth > 2010);
+        }
+
+        public IEnumerable<Pet> AllMaleDogs()
+        {
+            return AllByPredicate(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
+        {
+            return AllByPredicate(pet => pet.species == Species.Rabbit || pet.yearOfBirth > 2011);
+        }
     }
 
 }
