@@ -30,17 +30,59 @@ namespace Training.DomainClasses
             sortedPets.Sort((p1,p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
         }
+
         public IEnumerable<Pet> AllCats()
         {
-            foreach (var pet in _petsInTheStore)
-            {
-                if (pet.species == Species.Cat)
-                {
-                    yield return pet;
-                }
-            }
+            return _petsInTheStore.AllOfSameKind(new List<Species>() {Species.Cat});
         }
 
+        public IEnumerable<Pet> AllMice()
+        {
+            return _petsInTheStore.AllOfSameKind(new List<Species>() { Species.Mouse });
+        }
+
+        public IEnumerable<Pet> AllFemalePets()
+        {
+            return _petsInTheStore.AllSameSex(Sex.Female);
+        }
+
+        public IEnumerable<Pet> AllCatsOrDogs()
+        {
+            return _petsInTheStore.AllOfSameKind(new List<Species>() { Species.Dog , Species.Cat});
+        }
+
+        public IEnumerable<Pet> AllPetsButNotMice()
+        {
+            return _petsInTheStore.AllButNotThisKind(Species.Mouse);
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2010()
+        {
+            return _petsInTheStore.AllBornAfter(2010);
+        }
+
+        public IEnumerable<Pet> AllDogsBornAfter2010()
+        {
+            IEnumerable<Pet> dogs = _petsInTheStore.AllOfSameKind(new List<Species>() { Species.Dog });
+            return dogs.AllBornAfter(2010);
+        }
+
+        public IEnumerable<Pet> AllMaleDogs()
+        {
+            IEnumerable<Pet> dogs = _petsInTheStore.AllOfSameKind(new List<Species>() { Species.Dog });
+            return dogs.AllSameSex(Sex.Male);
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
+        {
+            var young = _petsInTheStore.AllBornAfter(2011);
+            var youngNotRabbits = young.AllButNotThisKind(Species.Rabbit);
+            var allRabbits = _petsInTheStore.AllOfSameKind(new List<Species>() {Species.Rabbit});
+            List<Pet> allTogether = new List<Pet>(allRabbits);
+            foreach (var youngNotRabbit in youngNotRabbits)
+                allTogether.Add(youngNotRabbit);
+            return allTogether;
+        }
     }
 
 }
