@@ -5,11 +5,11 @@ namespace Training.DomainClasses
 {
     public class PetShop
     {
-        private IList<Pet> _petsInTheStore;
+        private readonly IList<Pet> _petsInTheStore;
 
         public PetShop(IList<Pet> petsInTheStore)
         {
-            this._petsInTheStore = petsInTheStore;
+            _petsInTheStore = petsInTheStore;
         }
 
         public IEnumerable<Pet> AllPets()
@@ -23,6 +23,25 @@ namespace Training.DomainClasses
                 if (pet.name == newPet.name)
                     return;
             _petsInTheStore.Add(newPet);
+        }
+
+        public IEnumerable<Pet> AllCats()
+        {
+            foreach (var pet in _petsInTheStore)
+            {
+                if (pet.species == Species.Cat)
+                    yield return pet;
+            }
+        }
+
+        public IEnumerable<Pet> AllPetsSortedByName()
+        {
+            List<Pet> list = new List<Pet>(_petsInTheStore);
+            list.Sort((a, b) => string.CompareOrdinal(a.name, b.name));
+            foreach (var pet in list)
+            {
+                yield return pet;
+            }
         }
     }
 }
