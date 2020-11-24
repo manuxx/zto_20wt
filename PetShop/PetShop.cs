@@ -41,6 +41,13 @@ namespace Training.DomainClasses
             }
         }
 
+        public IEnumerable<Pet> AllMice() => _petsInTheStore.FindWithMatchingSpecies(p => p.species == Species.Mouse);
+        public IEnumerable<Pet> AllFemalePets() => _petsInTheStore.FindWithMatchingSpecies(p => p.sex == Sex.Female);
+        public IEnumerable<Pet> AllCatsOrDogs() => _petsInTheStore.FindWithMatchingSpecies(p => p.species == Species.Cat || p.species == Species.Dog);
+        public IEnumerable<Pet> AllPetsButNotMice() => _petsInTheStore.FindWithMatchingSpecies(p => p.species != Species.Mouse);
+        public IEnumerable<Pet> AllPetsBornAfter2010() => _petsInTheStore.FindWithMatchingSpecies(p => p.yearOfBirth > 2010);
+        public IEnumerable<Pet> AllDogsBornAfter2010() => _petsInTheStore.FindWithMatchingSpecies(p => p.yearOfBirth > 2010 && p.species == Species.Dog);
+        public IEnumerable<Pet> AllMaleDogs() => _petsInTheStore.FindWithMatchingSpecies(p => p.sex == Sex.Male && p.species == Species.Dog);
+        public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits() => _petsInTheStore.FindWithMatchingSpecies(p => p.yearOfBirth > 2011 || p.species == Species.Rabbit);
     }
-
 }

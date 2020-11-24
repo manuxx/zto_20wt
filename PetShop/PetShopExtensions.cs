@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Training.DomainClasses;
 
 static internal class PetShopExtensions
 {
@@ -8,5 +11,10 @@ static internal class PetShopExtensions
         {
             yield return item;
         }
+    }
+
+    public static IEnumerable<TItem> FindWithMatchingSpecies<TItem>(this IEnumerable<TItem> items, Predicate<TItem> predicate)
+    {
+        return ((List<TItem>)items).FindAll(predicate);
     }
 }
