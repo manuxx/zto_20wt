@@ -14,7 +14,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPets()
         {
-            return _petsInTheStore;
+            return _petsInTheStore.Immutabilize();
         }
 
         public void Add(Pet newPet)
