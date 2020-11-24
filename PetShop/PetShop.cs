@@ -29,14 +29,16 @@ namespace Training.DomainClasses
 
     public class ReadOnlySet : IEnumerable<Pet>
     {
+        private readonly IList<Pet> _petsInTheStore;
+
         public ReadOnlySet(IList<Pet> petsInTheStore)
         {
-            throw new NotImplementedException();
+            _petsInTheStore = petsInTheStore;
         }
 
         public IEnumerator<Pet> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _petsInTheStore.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
