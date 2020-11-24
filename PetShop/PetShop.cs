@@ -63,4 +63,5 @@ namespace Training.DomainClasses
             return GetEnumerator();
         }
     }
+
 }
