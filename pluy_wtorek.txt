@@ -8,5 +8,10 @@ MALECKI+
 
 
 lab3:
-beresniewicz
-szretter
+beresniewicz+
+szretter++
+malecki+
+kostrzebski++
+KArcz+
+fudela+
+okulski+
