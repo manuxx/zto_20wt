@@ -33,9 +33,6 @@ namespace Training.DomainClasses
         }
 
 
-        public IEnumerable<Pet> AllMice()
-            => _petsInTheStore.AllWhich(IsASpecie(Species.Mouse));
-
         private static Predicate<Pet> IsASpecie(Species species)
         {
             return pet => pet.species == species;
@@ -55,6 +52,9 @@ namespace Training.DomainClasses
         {
             return pet => pet.species != species;
         }
+
+        public IEnumerable<Pet> AllMice()
+            => _petsInTheStore.AllWhich(IsASpecie(Species.Mouse));
 
         public IEnumerable<Pet> AllCats()
             => _petsInTheStore.AllWhich(IsASpecie(Species.Cat));
