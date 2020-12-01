@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace Training.DomainClasses
 {
@@ -61,19 +62,53 @@ namespace Training.DomainClasses
         }
     }
 
-    public class SpeciesCriteria : Criteria<Pet>
+    public class SexCriteria : Criteria<Pet>
     {
-        private readonly Species _species;
+        private readonly Sex _sex;
 
-        public SpeciesCriteria(Species species)
+        public SexCriteria(Sex sex)
         {
-            _species = species;
-
+            _sex = sex;
         }
 
         public bool IsSatisfiedBy(Pet item)
         {
+            return item.sex == _sex;
+        }
+    }
+
+    public class SpeciesCriteria : Criteria<Pet>
+    {
+        private readonly Species _species;
+        private readonly bool _negate;
+
+        public SpeciesCriteria(Species species, bool negate = false)
+        {
+            _species = species;
+            _negate = negate;
+        }
+
+        public bool IsSatisfiedBy(Pet item)
+        {
+            if (_negate)
+                return item.species != _species;
+
             return item.species == _species;
+        }
+    }
+
+    public class BornAfterYearCriteria : Criteria<Pet>
+    {
+        private readonly int _year;
+
+        public BornAfterYearCriteria(int year)
+        {
+            _year = year;
+        }
+
+        public bool IsSatisfiedBy(Pet item)
+        {
+            return item.yearOfBirth > _year;
         }
     }
 }

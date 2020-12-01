@@ -34,25 +34,25 @@ namespace Training.DomainClasses
 
 
         public IEnumerable<Pet> AllMice()
-            => _petsInTheStore.ThatSatisfies(Pet.IsASpecie(Species.Mouse));
+            => _petsInTheStore.ThatSatisfies(new SpeciesCriteria(Species.Mouse));
 
         public IEnumerable<Pet> AllCats()
-            => _petsInTheStore.ThatSatisfies(Pet.IsASpecie(Species.Cat));
+            => _petsInTheStore.ThatSatisfies(new SpeciesCriteria(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
-            => _petsInTheStore.ThatSatisfies(Pet.IsFemale());
+            => _petsInTheStore.ThatSatisfies(new SexCriteria(Sex.Female));
 
         public IEnumerable<Pet> AllCatsOrDogs()
             => _petsInTheStore.ThatSatisfies(pet => pet.species == Species.Dog || pet.species == Species.Cat);
 
         public IEnumerable<Pet> AllPetsButNotMice()
-            => _petsInTheStore.ThatSatisfies(Pet.IsNotASpecie(Species.Mouse));
+            => _petsInTheStore.ThatSatisfies(new SpeciesCriteria(Species.Mouse, true));
 
         public IEnumerable<Pet> AllMaleDogs()
             => _petsInTheStore.ThatSatisfies(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
-            => _petsInTheStore.ThatSatisfies(Pet.IsBornAfter(2010));
+            => _petsInTheStore.ThatSatisfies(new BornAfterYearCriteria(2010));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             => _petsInTheStore.ThatSatisfies(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
