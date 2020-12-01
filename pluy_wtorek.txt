@@ -5,3 +5,8 @@ szreter+
 okulski+
 FROELKE+
 MALECKI+
+
+
+lab3:
+beresniewicz
+szretter

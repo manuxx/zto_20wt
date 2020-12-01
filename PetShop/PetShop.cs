@@ -34,39 +34,39 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.species == Species.Mouse));
+                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Mouse));
 
         public IEnumerable<Pet> AllCats()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.species == Species.Cat));
+                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.sex == Sex.Female));
+                _petsInTheStore.ThatSatisfy((pet => pet.sex == Sex.Female));
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.species == Species.Dog || pet.species == Species.Cat));
+                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Dog || pet.species == Species.Cat));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.species != Species.Mouse));
+                _petsInTheStore.ThatSatisfy((pet => pet.species != Species.Mouse));
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.species == Species.Dog && pet.sex == Sex.Male));
+                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Dog && pet.sex == Sex.Male));
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.yearOfBirth > 2010));
+                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2010));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog));
+                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog));
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, (pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
+                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
 
     }
 
