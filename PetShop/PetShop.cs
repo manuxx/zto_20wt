@@ -28,48 +28,63 @@ namespace Training.DomainClasses
         public IEnumerable<Pet> AllPetsSortedByName()
         {
             List<Pet> sortedPets = new List<Pet>(_petsInTheStore);
-            sortedPets.Sort((p1,p2) => p1.name.CompareTo(p2.name));
+            sortedPets.Sort((p1, p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
         }
 
-        private IEnumerable<Pet> FindPets(Predicate<Pet> predicate)
-        {
-            foreach (var pet in _petsInTheStore)
-            {
-                if (predicate(pet))
-                {
-                    yield return pet;
-                }
-            }
-        }
-
         public IEnumerable<Pet> AllMice()
-            => FindPets(pet => pet.species == Species.Mouse);
+            => _petsInTheStore.FindPets(IsASpecies(Species.Mouse));
+
 
         public IEnumerable<Pet> AllCats()
-            => FindPets(pet => pet.species == Species.Cat);
+            => _petsInTheStore.FindPets(IsASpecies(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
-            => FindPets(pet => pet.sex == Sex.Female);
+            => _petsInTheStore.FindPets(ThatAreFemale());
+
 
         public IEnumerable<Pet> AllCatsOrDogs()
-            => FindPets(pet => pet.species == Species.Dog || pet.species == Species.Cat);
+            => _petsInTheStore.FindPets(pet => pet.species == Species.Dog || pet.species == Species.Cat);
 
         public IEnumerable<Pet> AllPetsButNotMice()
-            => FindPets(pet => pet.species != Species.Mouse);
+            => _petsInTheStore.FindPets(IsNotASpecies(Species.Mouse));
 
         public IEnumerable<Pet> AllMaleDogs()
-            => FindPets(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
+            => _petsInTheStore.FindPets(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
-            => FindPets(pet => pet.yearOfBirth > 2010);
+            => _petsInTheStore.FindPets(IsBornAfter(2010));
+
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
-            => FindPets(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
+            => _petsInTheStore.FindPets(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
-            => FindPets(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
+            => _petsInTheStore.FindPets(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
 
+        private static Predicate<Pet> ThatAreMale()
+        {
+            return pet => pet.sex == Sex.Female;
+        }
+
+        private static Predicate<Pet> IsASpecies(Species species)
+        {
+            return pet => pet.species == species;
+        }
+
+        private static Predicate<Pet> IsNotASpecies(Species species)
+        {
+            return pet => pet.species == species;
+        }
+
+        private static Predicate<Pet> IsBornAfter(int year)
+        {
+            return pet => pet.yearOfBirth > year;
+        }
+
+        private static Predicate<Pet> ThatAreFemale()
+        {
+            return pet => pet.sex == Sex.Female;
+        }
     }
-
 }
