@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousCriteria.cs" />
     <Compile Include="EnviromentType.cs" />
+    <Compile Include="ICriteria.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetShop.cs" />
     <Compile Include="PetShopExtensions.cs" />

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Training.DomainClasses;
 
-static internal class PetShopExtensions
+public static partial class PetShopExtensions
 {
     public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> items)
     {
@@ -14,12 +14,18 @@ static internal class PetShopExtensions
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, Predicate<TItem> predicate)
     {
+        return pets.ThatSatisfy(predicate);
+    }
+    
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, ICriteria<TItem> criteria)
+    {
         foreach (var pet in pets)
         {
-            if (predicate(pet))
+            if (criteria.IsSatisfiedBy(pet))
             {
                 yield return pet;
             }
         }
     }
 }
+
