@@ -34,31 +34,31 @@ namespace Training.DomainClasses
 
 
         public IEnumerable<Pet> AllMice()
-            => _petsInTheStore.AllWhich(Pet.IsASpecie(Species.Mouse));
+            => _petsInTheStore.ThatSatisfies(Pet.IsASpecie(Species.Mouse));
 
         public IEnumerable<Pet> AllCats()
-            => _petsInTheStore.AllWhich(Pet.IsASpecie(Species.Cat));
+            => _petsInTheStore.ThatSatisfies(Pet.IsASpecie(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
-            => _petsInTheStore.AllWhich(Pet.IsFemale());
+            => _petsInTheStore.ThatSatisfies(Pet.IsFemale());
 
         public IEnumerable<Pet> AllCatsOrDogs()
-            => _petsInTheStore.AllWhich(pet => pet.species == Species.Dog || pet.species == Species.Cat);
+            => _petsInTheStore.ThatSatisfies(pet => pet.species == Species.Dog || pet.species == Species.Cat);
 
         public IEnumerable<Pet> AllPetsButNotMice()
-            => _petsInTheStore.AllWhich(Pet.IsNotASpecie(Species.Mouse));
+            => _petsInTheStore.ThatSatisfies(Pet.IsNotASpecie(Species.Mouse));
 
         public IEnumerable<Pet> AllMaleDogs()
-            => _petsInTheStore.AllWhich(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
+            => _petsInTheStore.ThatSatisfies(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
-            => _petsInTheStore.AllWhich(Pet.IsBornAfter(2010));
+            => _petsInTheStore.ThatSatisfies(Pet.IsBornAfter(2010));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
-            => _petsInTheStore.AllWhich(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
+            => _petsInTheStore.ThatSatisfies(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
-            => _petsInTheStore.AllWhich(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
+            => _petsInTheStore.ThatSatisfies(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
 
     }
 
