@@ -34,7 +34,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
             =>
-                PetShopExtensions.ThatSatisfy(_petsInTheStore, Pet.IsASpecies(Species.Mouse));
+                EnumerbaleExtensions.ThatSatisfy(_petsInTheStore, Pet.IsASpecies(Species.Mouse));
 
         public IEnumerable<Pet> AllCats()
             =>

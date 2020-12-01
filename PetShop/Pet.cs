@@ -40,9 +40,9 @@ namespace Training.DomainClasses
         public float price { get; set; }
         public Species species { get; set; }
 
-        public static Predicate<Pet> IsASpecies(Species specie)
+        public static Criteria<Pet> IsASpecies(Species specie)
         {
-            return pet => pet.species == specie;
+            return new SpeciesCriteria(specie);
         }
 
         public static Predicate<Pet> IsFemale()
@@ -58,6 +58,21 @@ namespace Training.DomainClasses
         public static Predicate<Pet> IsBornAfter(int year)
         {
             return (pet => pet.yearOfBirth > year);
+        }
+    }
+
+    public class SpeciesCriteria : Criteria<Pet>
+    {
+        private readonly Species _species;
+
+        public SpeciesCriteria(Species specie)
+        {
+            _species = specie;
+        }
+
+        public bool IsSatisfiedBy(Pet item)
+        {
+            return item.species == _species;
         }
     }
 }
