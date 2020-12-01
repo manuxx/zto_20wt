@@ -34,15 +34,34 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Mouse));
+                _petsInTheStore.ThatSatisfy(IsASpecies(Species.Mouse));
+
+        private static Predicate<Pet> IsASpecies(Species species)
+        {
+            return pet => pet.species == species;
+        }
+
+        public IEnumerable<Pet> AllPetsBornAfter2010()
+            =>
+                _petsInTheStore.ThatSatisfy(IsBornAfter(2010));
+
+        private static Predicate<Pet> IsBornAfter(int year)
+        {
+            return (pet => pet.yearOfBirth > year);
+        }
 
         public IEnumerable<Pet> AllCats()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Cat));
+                _petsInTheStore.ThatSatisfy(IsASpecies(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.sex == Sex.Female));
+                _petsInTheStore.ThatSatisfy(IsFemale());
+
+        private static Predicate<Pet> IsFemale()
+        {
+            return pet => pet.sex == Sex.Female;
+        }
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
@@ -50,15 +69,17 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.species != Species.Mouse));
+                _petsInTheStore.ThatSatisfy(IsNotASpecies(Species.Mouse));
+
+        private static Predicate<Pet> IsNotASpecies(Species species)
+        {
+            return pet => pet.species != species;
+        }
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
                 _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Dog && pet.sex == Sex.Male));
 
-        public IEnumerable<Pet> AllPetsBornAfter2010()
-            =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2010));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
