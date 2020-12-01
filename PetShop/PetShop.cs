@@ -32,15 +32,18 @@ namespace Training.DomainClasses
             return sortedPets;
         }
 
-        public IEnumerable<Pet> AllMice()
-<<<<<<< Updated upstream
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.species == Species.Mouse, _petsInTheStore);
+        private IEnumerable<Pet> FindPets(Predicate<Pet> predicate)
+        {
+            foreach (var pet in _petsInTheStore)
+            {
+                if (predicate(pet))
+                {
+                    yield return pet;
+                }
+            }
+        }
 
-        public IEnumerable<Pet> AllCats()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.species == Species.Cat, _petsInTheStore);
-=======
+        public IEnumerable<Pet> AllMice()
             => FindPets(IsSpecies(Species.Mouse));
 
         private static Predicate<Pet> IsSpecies(Species species)
@@ -50,44 +53,32 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCats()
             => FindPets(IsSpecies(Species.Cat));
->>>>>>> Stashed changes
 
         public IEnumerable<Pet> AllFemalePets()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.sex == Sex.Female, _petsInTheStore);
+            => FindPets(pet => pet.sex == Sex.Female);
 
         public IEnumerable<Pet> AllCatsOrDogs()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.species == Species.Dog || pet.species == Species.Cat, _petsInTheStore);
+            => FindPets(pet => pet.species == Species.Dog || pet.species == Species.Cat);
 
         public IEnumerable<Pet> AllPetsButNotMice()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.species != Species.Mouse, _petsInTheStore);
+            => FindPets(pet => pet.species != Species.Mouse);
 
         public IEnumerable<Pet> AllMaleDogs()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.species == Species.Dog && pet.sex == Sex.Male, _petsInTheStore);
+            => FindPets(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
-<<<<<<< Updated upstream
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.yearOfBirth > 2010, _petsInTheStore);
-=======
             => FindPets(IsBornAfter(2010));
 
         private static Predicate<Pet> IsBornAfter(int year)
         {
             return pet => pet.yearOfBirth > year;
         }
->>>>>>> Stashed changes
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog, _petsInTheStore);
+            => FindPets(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
-            =>
-                PetShopExtensions.FindPets(this, pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit, _petsInTheStore);
+            => FindPets(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
 
     }
 
