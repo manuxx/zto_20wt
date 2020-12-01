@@ -40,25 +40,19 @@ namespace Training.DomainClasses
         public float price { get; set; }
         public Species species { get; set; }
 
-        public static ICriteria<Pet> IsASpeciesCriteria(Species species)
+        public static ICriteria<Pet> IsASpecies(Species species)
         {
             return new SpeciesCriteria(species);
         }
 
-        public static Predicate<Pet> IsFemale()
-            => pet => pet.sex == Sex.Female;
-
-        private static Predicate<Pet> IsMale()
-            => pet => pet.sex == Sex.Male;
-
-        public static Predicate<Pet> IsASpecies(Species species)
-            => pet => pet.species == species;
+        public static ICriteria<Pet> IsFemale()
+            => new IsFemaleCriteria();
 
         public static Predicate<Pet> IsNotASpecies(Species species)
             => pet => pet.species != species;
 
-        public static Predicate<Pet> IsBornAfter(int year)
-            => pet => pet.yearOfBirth > 2010;
+        public static ICriteria<Pet> IsBornAfter(int year)
+            => new BornAfterCriteria(year);
     }
 
     public class SpeciesCriteria : ICriteria<Pet>
@@ -73,6 +67,29 @@ namespace Training.DomainClasses
         public bool IsSatisfiedBy(Pet pet)
         {
             return pet.species == _species;
+        }
+    }
+
+    public class BornAfterCriteria : ICriteria<Pet>
+    {
+        private readonly int _year;
+
+        public BornAfterCriteria(int year)
+        {
+            _year = year;
+        }
+
+        public bool IsSatisfiedBy(Pet pet)
+        {
+            return pet.yearOfBirth > _year;
+        }
+    }
+
+    public class IsFemaleCriteria : ICriteria<Pet>
+    {
+        public bool IsSatisfiedBy(Pet pet)
+        {
+            return pet.sex == Sex.Female;
         }
     }
 }
