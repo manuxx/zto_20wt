@@ -14,7 +14,7 @@ public static partial class PetShopExtensions
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, Predicate<TItem> predicate)
     {
-        return pets.ThatSatisfy(predicate);
+        return pets.ThatSatisfy(new AnonymousCriteria<TItem>(predicate));
     }
     
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, ICriteria<TItem> criteria)
