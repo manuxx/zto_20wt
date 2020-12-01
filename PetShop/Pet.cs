@@ -47,7 +47,7 @@ namespace Training.DomainClasses
 
         public static ICriteria<Pet> IsBornAfter(int year)
         {
-            return new BornAfter(year);
+            return new BornAfterCriteria(year);
         }
 
         public static ICriteria<Pet> IsFemale()
@@ -76,11 +76,11 @@ namespace Training.DomainClasses
         }
     }
 
-    public class BornAfter : ICriteria<Pet>
+    public class BornAfterCriteria : ICriteria<Pet>
     {
         private readonly int _year;
 
-        public BornAfter(int year)
+        public BornAfterCriteria(int year)
         {
             _year = year;
         }
