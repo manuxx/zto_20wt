@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using Training.DomainClasses;
 
 static internal class PetShopExtensions
@@ -14,12 +15,22 @@ static internal class PetShopExtensions
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, Predicate<TItem> predicate)
     {
+        return pets.ThatSatisfy(new AnonymousCriteria<TItem>(predicate));
+    }
+
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, Criteria<TItem> criteria)
+    {
         foreach (var pet in pets)
         {
-            if (predicate(pet))
+            if (criteria.IsSatisfiedBy(pet))
             {
                 yield return pet;
             }
         }
     }
+}
+
+public interface Criteria<T>
+{
+   bool IsSatisfiedBy(T pet);
 }
