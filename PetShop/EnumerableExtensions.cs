@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-static internal class PetShopExtensions
+static public class EnumerableExtensions
 {
     public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> items)
     {
@@ -26,24 +26,4 @@ static internal class PetShopExtensions
             }
         }
     }
-}
-
-internal class AnonymusCriteria<T> : Criteria<T>
-{
-    private readonly Predicate<T> _predicate;
-
-    public AnonymusCriteria(Predicate<T> predicate)
-    {
-        _predicate = predicate;
-    }
-
-    public bool IsSatisfiedBy(T item)
-    {
-        return _predicate(item);
-    }
-}
-
-public interface Criteria<T>
-{
-    bool IsSatisfiedBy(T item);
 }
