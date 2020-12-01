@@ -1,12 +1,19 @@
+using System;
 using System.Collections.Generic;
 
-static internal class PetShopExtensions
+namespace Training.DomainClasses
 {
-    public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> items)
+    static internal class PetShopExtensions
     {
-        foreach (var item in items)
+        public static IEnumerable<Pet> FindPets(PetShop petShop, Predicate<Pet> predicate, IList<Pet> pets)
         {
-            yield return item;
+            foreach (var pet in pets)
+            {
+                if (predicate(pet))
+                {
+                    yield return pet;
+                }
+            }
         }
     }
 }
