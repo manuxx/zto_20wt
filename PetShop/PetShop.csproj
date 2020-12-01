@@ -40,8 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnonymousCriteria.cs" />
+    <Compile Include="BornAfterCriteria.cs" />
     <Compile Include="EnviromentType.cs" />
     <Compile Include="ICriteria.cs" />
+    <Compile Include="IsFemaleCriteria.cs" />
+    <Compile Include="IsMaleCriteria.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetShop.cs" />
     <Compile Include="PetShopExtensions.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="ReadOnly.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="Sex.cs" />
+    <Compile Include="SpeciesCriteria.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
