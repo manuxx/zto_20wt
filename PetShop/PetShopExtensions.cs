@@ -22,4 +22,20 @@ static internal class PetShopExtensions
             }
         }
     }
+
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> petsInTheStore, Criteria<TItem> criteria)
+    {
+        foreach (var pet in petsInTheStore)
+        {
+            if (criteria.IsSatisfiedBy(pet))
+            {
+                yield return pet;
+            }
+        }
+    }
+}
+
+public interface Criteria<TItem>
+{
+    bool IsSatisfiedBy(TItem item);
 }
