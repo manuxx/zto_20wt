@@ -34,15 +34,19 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Mouse);
+                _petsInTheStore.ThatSatisfy(IsSpecies(Species.Mouse));
+
+        private static Predicate<Pet> IsSpecies(Species species) => pet => pet.species == species;
 
         public IEnumerable<Pet> AllCats()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Cat);
+                _petsInTheStore.ThatSatisfy(IsSpecies(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.sex == Sex.Female);
+                _petsInTheStore.ThatSatisfy(IsFemale());
+
+        private static Predicate<Pet> IsFemale() => pet => pet.sex == Sex.Female;
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
@@ -58,7 +62,9 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.yearOfBirth > 2010);
+                _petsInTheStore.ThatSatisfy(IsBornAfter(2010));
+
+        private static Predicate<Pet> IsBornAfter(int year) => pet => pet.yearOfBirth > year;
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
