@@ -34,25 +34,45 @@ namespace Training.DomainClasses
 
 
         public IEnumerable<Pet> AllMice()
-            => _petsInTheStore.AllWhich(pet => pet.species == Species.Mouse);
+            => _petsInTheStore.AllWhich(IsASpecie(Species.Mouse));
+
+        private static Predicate<Pet> IsASpecie(Species species)
+        {
+            return pet => pet.species == species;
+        }
+
+        private static Predicate<Pet> IsFemale()
+        {
+            return pet => pet.sex == Sex.Female;
+        }
+
+        private static Predicate<Pet> IsBornAfter(int year)
+        {
+            return pet => pet.yearOfBirth > year;
+        }
+
+        private static Predicate<Pet> IsNotSpecie(Species species)
+        {
+            return pet => pet.species != species;
+        }
 
         public IEnumerable<Pet> AllCats()
-            => _petsInTheStore.AllWhich(pet => pet.species == Species.Cat);
+            => _petsInTheStore.AllWhich(IsASpecie(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
-            => _petsInTheStore.AllWhich(pet => pet.sex == Sex.Female);
+            => _petsInTheStore.AllWhich(IsFemale());
 
         public IEnumerable<Pet> AllCatsOrDogs()
             => _petsInTheStore.AllWhich(pet => pet.species == Species.Dog || pet.species == Species.Cat);
 
         public IEnumerable<Pet> AllPetsButNotMice()
-            => _petsInTheStore.AllWhich(pet => pet.species != Species.Mouse);
+            => _petsInTheStore.AllWhich(IsNotSpecie(Species.Mouse));
 
         public IEnumerable<Pet> AllMaleDogs()
             => _petsInTheStore.AllWhich(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
-            => _petsInTheStore.AllWhich(pet => pet.yearOfBirth > 2010);
+            => _petsInTheStore.AllWhich(IsBornAfter(2010));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             => _petsInTheStore.AllWhich(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
