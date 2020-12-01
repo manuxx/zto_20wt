@@ -40,9 +40,9 @@ namespace Training.DomainClasses
         public float price { get; set; }
         public Species species { get; set; }
 
-        public static Predicate<Pet> IsASpecie(Species specie)
+        public static ICriteria<Pet> IsASpecie(Species specie)
         {
-            return pet => pet.species == specie;
+            return new SpeciesCriteria(specie);
         }
 
         public static Predicate<Pet> IsNotASpecie(Species specie)

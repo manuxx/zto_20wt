@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Training.DomainClasses
@@ -33,51 +32,31 @@ namespace Training.DomainClasses
         }
 
         public IEnumerable<Pet> AllMice()
-            => _petsInTheStore.ThatSatisfy(IsASpecie(Species.Mouse));
+            => _petsInTheStore.ThatSatisfy(Pet.IsASpecie(Species.Mouse));
 
         public IEnumerable<Pet> AllCats()
-            => _petsInTheStore.ThatSatisfy(IsASpecie(Species.Cat));
+            => _petsInTheStore.ThatSatisfy(Pet.IsASpecie(Species.Cat));
 
         public IEnumerable<Pet> AllFemalePets()
-            => _petsInTheStore.ThatSatisfy(IsFemale());
+            => _petsInTheStore.ThatSatisfy(Pet.IsFemale());
 
         public IEnumerable<Pet> AllCatsOrDogs()
             => _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Dog || pet.species == Species.Cat);
 
         public IEnumerable<Pet> AllPetsButNotMice()
-            => _petsInTheStore.ThatSatisfy(IsNotASpecie(Species.Mouse));
+            => _petsInTheStore.ThatSatisfy(Pet.IsNotASpecie(Species.Mouse));
 
         public IEnumerable<Pet> AllMaleDogs()
             => _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
-            => _petsInTheStore.ThatSatisfy(IsBornAfter(2010));
+            => _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2010));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             => _petsInTheStore.ThatSatisfy(pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog);
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             => _petsInTheStore.ThatSatisfy(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
-
-        private static Predicate<Pet> IsASpecie(Species specie)
-        {
-            return pet => pet.species == specie;
-        }
-
-        private static Predicate<Pet> IsNotASpecie(Species specie)
-        {
-            return pet => pet.species != specie;
-        }
-
-        private static Predicate<Pet> IsFemale()
-        {
-            return pet => pet.sex == Sex.Female;
-        }
-
-        private static Predicate<Pet> IsBornAfter(int year)
-        {
-            return pet => pet.yearOfBirth > year;
-        }
     }
 
 }
