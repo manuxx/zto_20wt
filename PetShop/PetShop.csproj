@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnonymousCriteria.cs" />
+    <Compile Include="Criteria\AnonymousCriteria.cs" />
+    <Compile Include="Criteria\BornAfterCriteria.cs" />
+    <Compile Include="Criteria\SexCriteria.cs" />
     <Compile Include="EnviromentType.cs" />
-    <Compile Include="ICriteria.cs" />
+    <Compile Include="Criteria\ICriteria.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetShop.cs" />
     <Compile Include="PetShopExtensions.cs" />
@@ -49,8 +51,9 @@
     <Compile Include="ReadOnly.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="Sex.cs" />
-    <Compile Include="SpeciesCriteria.cs" />
+    <Compile Include="Criteria\SpeciesCriteria.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
