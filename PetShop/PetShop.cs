@@ -33,12 +33,24 @@ namespace Training.DomainClasses
         }
 
         public IEnumerable<Pet> AllMice()
+<<<<<<< Updated upstream
             =>
                 PetShopExtensions.FindPets(this, pet => pet.species == Species.Mouse, _petsInTheStore);
 
         public IEnumerable<Pet> AllCats()
             =>
                 PetShopExtensions.FindPets(this, pet => pet.species == Species.Cat, _petsInTheStore);
+=======
+            => FindPets(IsSpecies(Species.Mouse));
+
+        private static Predicate<Pet> IsSpecies(Species species)
+        {
+            return pet => pet.species == species;
+        }
+
+        public IEnumerable<Pet> AllCats()
+            => FindPets(IsSpecies(Species.Cat));
+>>>>>>> Stashed changes
 
         public IEnumerable<Pet> AllFemalePets()
             =>
@@ -57,8 +69,17 @@ namespace Training.DomainClasses
                 PetShopExtensions.FindPets(this, pet => pet.species == Species.Dog && pet.sex == Sex.Male, _petsInTheStore);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
+<<<<<<< Updated upstream
             =>
                 PetShopExtensions.FindPets(this, pet => pet.yearOfBirth > 2010, _petsInTheStore);
+=======
+            => FindPets(IsBornAfter(2010));
+
+        private static Predicate<Pet> IsBornAfter(int year)
+        {
+            return pet => pet.yearOfBirth > year;
+        }
+>>>>>>> Stashed changes
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
