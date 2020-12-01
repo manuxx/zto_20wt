@@ -12,7 +12,7 @@ static internal class PetShopExtensions
         }
     }
 
-    public static IEnumerable<TItem> FindPets<TItem>(this IEnumerable<TItem> items, Predicate<TItem> predicate)
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> items, Predicate<TItem> predicate)
     {
         foreach (var item in items)
         {
