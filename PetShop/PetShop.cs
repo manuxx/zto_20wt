@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Training.DomainClasses
@@ -28,7 +27,7 @@ namespace Training.DomainClasses
         public IEnumerable<Pet> AllPetsSortedByName()
         {
             List<Pet> sortedPets = new List<Pet>(_petsInTheStore);
-            sortedPets.Sort((p1,p2) => p1.name.CompareTo(p2.name));
+            sortedPets.Sort((p1, p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
         }
 
