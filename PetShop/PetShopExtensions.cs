@@ -12,13 +12,18 @@ static internal class PetShopExtensions
         }
     }
 
-    public static IEnumerable<Pet> ThatSatisfy(this IList<Pet> pets, Predicate<Pet> predicate)
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IList<TItem> items, Predicate<TItem> predicate)
     {
-        foreach (var pet in pets)
+        return items.ThatSatisfy(new AnonymousCriteria<TItem>(predicate));
+    }
+
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IList<TItem> items, Criteria<TItem> criteria)
+    {
+        foreach (var item in items)
         {
-            if (predicate(pet))
+            if (criteria.IsSatisfiedBy(item))
             {
-                yield return pet;
+                yield return item;
             }
         }
     }
