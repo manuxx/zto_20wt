@@ -41,7 +41,7 @@ namespace Training.DomainClasses
         public Species species { get; set; }
 
         public static ICriteria<Pet> IsSpecies(Species species) => new SpeciesCriteria(species);
-        public static Predicate<Pet> IsFemale() => pet => pet.sex == Sex.Female;
-        public static Predicate<Pet> IsBornAfter(int year) => pet => pet.yearOfBirth > year;
+        public static ICriteria<Pet> IsFemale() => new SexCriteria(Sex.Female);
+        public static ICriteria<Pet> IsBornAfter(int year) => new AgeCriteria(year);
     }
 }
