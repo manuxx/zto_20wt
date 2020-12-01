@@ -36,7 +36,6 @@ namespace Training.DomainClasses
             =>
                 _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Mouse));
 
-
         public IEnumerable<Pet> AllCats()
             =>
                 _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Cat));
@@ -53,10 +52,9 @@ namespace Training.DomainClasses
             =>
                 _petsInTheStore.ThatSatisfy(Pet.IsNotSpecies(Species.Mouse));
 
-
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Dog && Pet.IsMale(pet));
+                _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
             =>
