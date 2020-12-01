@@ -14,13 +14,7 @@ static internal class PetShopExtensions
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> petsInTheStore, Predicate<TItem> predicate)
     {
-        foreach (var pet in petsInTheStore)
-        {
-            if (predicate(pet))
-            {
-                yield return pet;
-            }
-        }
+        return petsInTheStore.ThatSatisfy(new AnonymousCriteria<TItem>(predicate));
     }
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> petsInTheStore, Criteria<TItem> criteria)
@@ -33,9 +27,4 @@ static internal class PetShopExtensions
             }
         }
     }
-}
-
-public interface Criteria<TItem>
-{
-    bool IsSatisfiedBy(TItem item);
 }
