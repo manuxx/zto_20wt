@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousCriteria.cs" />
     <Compile Include="ICriteria.cs" />
     <Compile Include="EnviromentType.cs" />
     <Compile Include="Pet.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="ReadOnly.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="Sex.cs" />
+    <Compile Include="SpeciesCriteria.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
