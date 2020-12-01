@@ -16,7 +16,7 @@ namespace Training.DomainClasses
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Pet) obj);
+            return Equals((Pet)obj);
         }
 
         public override int GetHashCode()
@@ -45,19 +45,34 @@ namespace Training.DomainClasses
             return new SpeciesCriteria(species);
         }
 
-        public static Predicate<Pet> IsFemale()
+        public static Criteria<Pet> IsFemale()
         {
-            return pet => pet.sex == Sex.Female;
+            return new FemaleCriteria();
         }
 
-        public static Predicate<Pet> IsBornAfter(int year)
+        public static Criteria<Pet> IsBornAfter(int year)
         {
-            return pet => pet.yearOfBirth > year;
+            return new IsBornAfterCriteria(year);
         }
 
         public static Predicate<Pet> IsNotASpecies(Species species)
         {
             return pet => pet.species != species;
+        }
+    }
+
+    public class IsBornAfterCriteria : Criteria<Pet>
+    {
+        private readonly int _year;
+
+        public IsBornAfterCriteria(int year)
+        {
+            _year = year;
+        }
+
+        public bool IsSatisfiedBy(Pet pet)
+        {
+            return pet.yearOfBirth > _year;
         }
     }
 
@@ -73,6 +88,14 @@ namespace Training.DomainClasses
         public bool IsSatisfiedBy(Pet pet)
         {
             return pet.species == _species;
+        }
+    }
+
+    public class FemaleCriteria : Criteria<Pet>
+    {
+        public bool IsSatisfiedBy(Pet pet)
+        {
+            return pet.sex == Sex.Female;
         }
     }
 }
