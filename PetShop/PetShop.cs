@@ -42,7 +42,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllFemalePets()
             =>
-                _petsInTheStore.ThatSatisfy(Pet.IsFemale);
+                _petsInTheStore.ThatSatisfy(Pet.IsFemale());
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
