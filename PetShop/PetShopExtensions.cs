@@ -1,12 +1,30 @@
+using System;
 using System.Collections.Generic;
+using Training.DomainClasses;
 
-static internal class PetShopExtensions
+namespace Training.DomainClasses
 {
-    public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> items)
+
+    static internal class PetShopExtensions
     {
-        foreach (var item in items)
+        public static IEnumerable<TItem> OneAtATime<TItem>(this IEnumerable<TItem> items)
         {
-            yield return item;
+            foreach (var item in items)
+            {
+                yield return item;
+            }
         }
+
+        public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> pets, Predicate<TItem> predicate)
+        {
+            foreach (var pet in pets)
+            {
+                if (predicate(pet))
+                {
+                    yield return pet;
+                }
+            }
+        }
+
     }
 }
