@@ -16,7 +16,7 @@ namespace Training.DomainClasses
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Pet) obj);
+            return Equals((Pet)obj);
         }
 
         public override int GetHashCode()
@@ -39,5 +39,14 @@ namespace Training.DomainClasses
         public int yearOfBirth { get; set; }
         public float price { get; set; }
         public Species species { get; set; }
+
+        public static Criteria<Pet> IsBornAfter(int year) => new BornAfterCriteria(year);
+
+        public static Criteria<Pet> IsASpecies(Species species) => new SpeciesCriteria(species);
+
+        public static Criteria<Pet> IsFemale() => new SexCriteria(Sex.Female);
+
+        public static Predicate<Pet> IsANotSpecies(Species species) => (pet => pet.species != species);
+
     }
 }
