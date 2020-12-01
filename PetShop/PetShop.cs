@@ -34,15 +34,30 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Mouse);
+                _petsInTheStore.ThatSatisfy(IsAMouse);
+
+        private bool IsAMouse(Pet pet)
+        {
+            return pet.species == Species.Mouse;
+        }
 
         public IEnumerable<Pet> AllCats()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.species == Species.Cat);
+                _petsInTheStore.ThatSatisfy(IsASpecie(Species.Cat));
+
+        private static Predicate<Pet> IsASpecie(Species specie)
+        {
+            return pet => pet.species == specie;
+        }
 
         public IEnumerable<Pet> AllFemalePets()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.sex == Sex.Female);
+                _petsInTheStore.ThatSatisfy(IsSex(Sex.Female));
+
+        private static Predicate<Pet> IsSex(Sex sex)
+        {
+            return pet => pet.sex == sex;
+        }
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
@@ -50,7 +65,12 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.species != Species.Mouse);
+                _petsInTheStore.ThatSatisfy(IsNotASpiecie(Species.Mouse));
+
+        private static Predicate<Pet> IsNotASpiecie(Species specie)
+        {
+            return pet => pet.species != specie;
+        }
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
@@ -58,7 +78,12 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
             =>
-                _petsInTheStore.ThatSatisfy(pet => pet.yearOfBirth > 2010);
+                _petsInTheStore.ThatSatisfy(IsBornAfter(2010));
+
+        private static Predicate<Pet> IsBornAfter(int year)
+        {
+            return pet => pet.yearOfBirth > year;
+        }
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
