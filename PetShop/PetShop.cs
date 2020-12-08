@@ -61,28 +61,10 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog));
+                _petsInTheStore.ThatSatisfy(new Conjunction<Pet>(Pet.IsBornAfter(2010), Pet.IsASpecies(Species.Dog)));
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
-
-    }
-
-    public class Conjunction<TItem> : Criteria<TItem>
-    {
-        private readonly Criteria<TItem> m_criteria1;
-        private readonly Criteria<TItem> m_criteria2;
-
-        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
-        {
-            m_criteria1 = criteria1;
-            m_criteria2 = criteria2;
-        }
-
-        public bool IsSatisfiedBy(TItem item)
-        {
-            return m_criteria1.IsSatisfiedBy(item) && m_criteria2.IsSatisfiedBy(item);
-        }
+                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsBornAfter(2011), Pet.IsASpecies(Species.Rabbit)));
     }
 }

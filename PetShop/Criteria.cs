@@ -1,5 +1,22 @@
 namespace Training.DomainClasses
 {
+    public class Conjunction<TItem> : Criteria<TItem>
+    {
+        private readonly Criteria<TItem> m_criteria1;
+        private readonly Criteria<TItem> m_criteria2;
+
+        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
+        {
+            m_criteria1 = criteria1;
+            m_criteria2 = criteria2;
+        }
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return m_criteria1.IsSatisfiedBy(item) && m_criteria2.IsSatisfiedBy(item);
+        }
+    }
+
     public class Negation<TItem> : Criteria<TItem>
     {
         private readonly Criteria<TItem> _criteria4Negation;
@@ -11,7 +28,7 @@ namespace Training.DomainClasses
 
         public bool IsSatisfiedBy(TItem item)
         {
-            return ! _criteria4Negation.IsSatisfiedBy(item);
+            return !_criteria4Negation.IsSatisfiedBy(item);
         }
     }
 
