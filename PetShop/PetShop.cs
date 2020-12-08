@@ -58,7 +58,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Conjunction<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsMale()));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).And(Pet.IsMale()));
 
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
@@ -69,5 +69,13 @@ namespace Training.DomainClasses
             =>
                 _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
 
+    }
+
+    public static class CriteriaExtensions
+    {
+        public static Criteria<TItem> And<TItem>(this Criteria<TItem> criteria, Criteria<TItem> other)
+        {
+            return new Conjunction<TItem>(criteria, other);
+        }
     }
 }
