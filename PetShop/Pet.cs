@@ -104,5 +104,17 @@ namespace Training.DomainClasses
         }
     }
 
-    
+    public class Negation<TItem> : Criteria<TItem>
+    {
+        private Criteria<TItem> _isSatisfied;
+        public Negation(Criteria<TItem> isSatisfied)
+        {
+            _isSatisfied = isSatisfied;
+        }
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return !_isSatisfied.IsSatisfiedBy(item);
+        }
+    }
 }
