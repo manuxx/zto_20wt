@@ -58,7 +58,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Conjunction(Pet.IsASpecies(Species.Dog), Pet.IsMale()));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).And((Pet.IsMale())));
 
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
@@ -71,20 +71,28 @@ namespace Training.DomainClasses
 
     }
 
-    public class Conjunction : Criteria<Pet>
+    public class Conjunction<TItem> : Criteria<TItem>
     {
-        private readonly Criteria<Pet> _leftCriteria;
-        private readonly Criteria<Pet> _rightCriteria;
+        private readonly Criteria<TItem> _leftCriteria;
+        private readonly Criteria<TItem> _rightCriteria;
 
-        public Conjunction(Criteria<Pet> leftCriteria, Criteria<Pet> rightCriteria)
+        public Conjunction(Criteria<TItem> leftCriteria, Criteria<TItem> rightCriteria)
         {
             _leftCriteria = leftCriteria;
             _rightCriteria = rightCriteria;
         }
 
-        public bool IsSatisfiedBy(Pet pet)
+        public bool IsSatisfiedBy(TItem pet)
         {
             return _leftCriteria.IsSatisfiedBy(pet) && _rightCriteria.IsSatisfiedBy(pet);
+        }
+    }
+
+    public static class CriteriaExtensions
+    {
+        public static Criteria<TItem> And<TItem>(this Criteria<TItem> criteria, Criteria<TItem> other)
+        {
+            return new Conjunction<TItem>(criteria, other);
         }
     }
 }
