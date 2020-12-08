@@ -2,18 +2,18 @@ namespace Training.DomainClasses
 {
     public class Alternative<TItem> : Criteria<TItem>
     {
-        private readonly Criteria<TItem> _leftCriteria;
-        private readonly Criteria<TItem> _rightCriteria;
+        private readonly Criteria<TItem> _firstCriteria;
+        private readonly Criteria<TItem> _secondCriteria;
 
-        public Alternative(Criteria<TItem> leftCriteria, Criteria<TItem> rightCriteria)
+        public Alternative(Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
         {
-            _leftCriteria = leftCriteria;
-            _rightCriteria = rightCriteria;
+            _firstCriteria = firstCriteria;
+            _secondCriteria = secondCriteria;
         }
 
         public bool IsSatisfiedBy(TItem item)
         {
-            return _leftCriteria.IsSatisfiedBy(item) || _rightCriteria.IsSatisfiedBy(item);
+            return _firstCriteria.IsSatisfiedBy(item) || _secondCriteria.IsSatisfiedBy(item);
         }
     }
 }
