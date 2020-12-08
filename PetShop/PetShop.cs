@@ -58,7 +58,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Conjunction(Pet.IsASpecies(Species.Dog), Pet.IsMale()));
+                _petsInTheStore.ThatSatisfy(new Conjunction<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsMale()));
         //(pet => pet.species == Species.Dog && pet.sex == Sex.Male));
 
 
@@ -72,18 +72,18 @@ namespace Training.DomainClasses
 
     }
 
-    public class Conjunction : Criteria<Pet>
+    public class Conjunction<TItem> : Criteria<TItem>
     {
-        private readonly Criteria<Pet> _firstCriteria;
-        private readonly Criteria<Pet> _secondCriteria;
+        private readonly Criteria<TItem> _firstCriteria;
+        private readonly Criteria<TItem> _secondCriteria;
 
-        public Conjunction(Criteria<Pet> firstCriteria, Criteria<Pet> secondCriteria)
+        public Conjunction(Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
         {
             _firstCriteria = firstCriteria;
             _secondCriteria = secondCriteria;
         }
 
-        public bool IsSatisfiedBy(Pet item)
+        public bool IsSatisfiedBy(TItem item)
         {
             return _firstCriteria.IsSatisfiedBy(item) && _secondCriteria.IsSatisfiedBy(item);
         }
