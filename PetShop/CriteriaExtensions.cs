@@ -18,4 +18,9 @@ public static class CriteriaExtensions
     {
         return new Alternative<TItem>(lhsCriteria, rhsCriteria);
     }
+
+    public static Criteria<TItem> Negated<TItem>(this Criteria<TItem> criteria)
+    {
+        return new Negation<TItem>(criteria);
+    }
 }
