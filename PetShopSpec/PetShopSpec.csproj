@@ -88,6 +88,7 @@
     <Compile Include="Utilities\CollectionExtensions.cs" />
     <Compile Include="PetShopSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CriteriaBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
