@@ -204,7 +204,8 @@ namespace Training.Spec
         };
         private It should_be_able_to_find_all_mice = () =>
         {
-            var foundPets = subject.AllMice();
+            var criteria = Where<Pet>.hasAn(p => p.species).EqualTo(Species.Mouse);
+            var foundPets = subject.AllPets().ThatSatisfy(criteria);
             foundPets.ShouldContainOnly(mouse_Dixie, mouse_Jerry);
         };
         //[Ignore("Will be implemented next")]

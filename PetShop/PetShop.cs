@@ -32,10 +32,6 @@ namespace Training.DomainClasses
             return sortedPets;
         }
 
-        public IEnumerable<Pet> AllMice()
-            =>
-                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Mouse));
-
         public IEnumerable<Pet> AllPetsBornAfter2010()
             =>
                 _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2010));
