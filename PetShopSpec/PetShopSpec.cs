@@ -4,6 +4,8 @@ using PetShopSpec.Utilities;
 using Training.DomainClasses;
 using Machine.Specifications;
 using Machine.Specifications.AutoMocking.Rhino;
+using Moq;
+using It = Machine.Specifications.It;
 
 namespace Training.Spec
 {
