@@ -50,7 +50,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Dog || pet.species == Species.Cat));
+                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsASpecies(Species.Cat)));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
@@ -71,4 +71,20 @@ namespace Training.DomainClasses
 
     }
 
+    public class Alternative<TItem> : Criteria<TItem>
+    {
+        private readonly Criteria<TItem> _firstCriteria;
+        private readonly Criteria<TItem> _secondCriteria;
+
+        public Alternative(Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
+        {
+            _firstCriteria = firstCriteria;
+            _secondCriteria = secondCriteria;
+        }
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return _firstCriteria.IsSatisfiedBy(item) || _secondCriteria.IsSatisfiedBy(item);
+        }
+    }
 }
