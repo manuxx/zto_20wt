@@ -71,43 +71,41 @@ namespace Training.DomainClasses
 
     }
 
-    public class Conjunction<T> : Criteria<T>
+    public class Conjunction<T> : CompositeCriteria<T>
     {
-        private readonly Criteria<T> _criteria;
-        private readonly Criteria<T> _otherCriteria;
-
-        public Conjunction(Criteria<T> criteria, Criteria<T> otherCriteria)
+        public Conjunction(Criteria<T> left, Criteria<T> right) : base(left, right)
         {
-            _criteria = criteria;
-            _otherCriteria = otherCriteria;
         }
 
-        public bool IsSatisfiedBy(T subject)
+        public override bool IsSatisfiedBy(T subject)
         {
-            return _criteria.IsSatisfiedBy(subject) && _otherCriteria.IsSatisfiedBy(subject);
+            return _left.IsSatisfiedBy(subject) && _right.IsSatisfiedBy(subject);
         }
     }
 
-    public class Alternative<T> : Criteria<T>
+    public abstract class CompositeCriteria<T> : Criteria<T>
     {
-        public Criteria<T>[] Criteria { get; }
+        protected Criteria<T> _left;
+        protected Criteria<T> _right;
 
-        public Alternative(params Criteria<T>[] criteria)
+        protected CompositeCriteria(Criteria<T> left, Criteria<T> right)
         {
-            Criteria = criteria;
+            _left = left;
+            _right = right;
         }
 
-        public bool IsSatisfiedBy(T subject)
-        {
-            foreach (var criteria in Criteria)
-            {
-                if (criteria.IsSatisfiedBy(subject))
-                {
-                    return true;
-                }
-            }
+        public abstract bool IsSatisfiedBy(T subject);
+    }
 
-            return false;
+    public class Alternative<T> : CompositeCriteria<T>
+    {
+        public Alternative(Criteria<T> left, Criteria<T> right) : base(left, right)
+        {
+        }
+        
+        public override bool IsSatisfiedBy(T subject)
+        {
+            return _left.IsSatisfiedBy(subject) || _right.IsSatisfiedBy(subject);
         }
     }
 
