@@ -6,5 +6,10 @@ namespace Training.DomainClasses
         {
             return new Conjunction<TItem>(criteria, other);
         }
+
+        public static Criteria<TItem> Or(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
+        {
+            return new Alternative<TItem>(firstCriteria, secondCriteria);
+        }
     }
 }
