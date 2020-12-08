@@ -1,13 +1,11 @@
-using System;
-
 namespace Training.DomainClasses
 {
-    public class Alternative : Criteria<Pet>
+    public class Conjunction : Criteria<Pet>
     {
         private readonly Criteria<Pet> _leftCriteria;
         private readonly Criteria<Pet> _rightCriteria;
 
-        public Alternative(Criteria<Pet> leftCriteria, Criteria<Pet> rightCriteria)
+        public Conjunction(Criteria<Pet> leftCriteria, Criteria<Pet> rightCriteria)
         {
             _leftCriteria = leftCriteria;
             _rightCriteria = rightCriteria;
@@ -15,9 +13,7 @@ namespace Training.DomainClasses
 
         public bool IsSatisfiedBy(Pet pet)
         {
-            return _leftCriteria.IsSatisfiedBy(pet) || _rightCriteria.IsSatisfiedBy(pet);
+            return _leftCriteria.IsSatisfiedBy(pet) && _rightCriteria.IsSatisfiedBy(pet);
         }
     }
-
-    
 }
