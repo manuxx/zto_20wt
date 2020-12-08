@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Training.DomainClasses;
 
@@ -10,11 +9,6 @@ public static class EnumerableExtensions
         {
             yield return item;
         }
-    }
-
-    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> items, Predicate<TItem> predicate)
-    {
-        return items.ThatSatisfy(new AnonymousCriteria<TItem>(predicate));
     }
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> items, Criteria<TItem> criteria)
