@@ -102,5 +102,10 @@ namespace Training.DomainClasses
                 return item.yearOfBirth > _year;
             }
         }
+
+        public static SexCriteria IsMale()
+        {
+            return new SexCriteria(Sex.Male);
+        }
     }
 }
