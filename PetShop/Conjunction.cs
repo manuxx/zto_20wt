@@ -2,18 +2,26 @@ using System.Collections.Generic;
 
 namespace Training.DomainClasses
 {
-    public class Conjunction<TItem> : Criteria<TItem>
+    public abstract class CompositeCriteria<TItem> : Criteria<TItem>
     {
-        private readonly IEnumerable<Criteria<TItem>> _criterias;
+        protected IEnumerable<Criteria<TItem>> _criterias;
 
-
-        public Conjunction(params Criteria<TItem>[] criterias)
+        public CompositeCriteria(params Criteria<TItem>[] criterias)
         {
             _criterias = criterias;
         }
 
+        public abstract bool IsSatisfiedBy(TItem item);
+    }
 
-        public bool IsSatisfiedBy(TItem item)
+    public class Conjunction<TItem> : CompositeCriteria<TItem>
+    {
+        public Conjunction(params Criteria<TItem>[] criterias) : base(criterias)
+        {
+        }
+
+
+        public override bool IsSatisfiedBy(TItem item)
         {
             foreach (var criteria in _criterias)
             {
