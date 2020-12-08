@@ -64,12 +64,12 @@ public interface Criteria<TItem>
 
 public static class CriteriaExtensions
 {
-    public static Alternative<TItem> Or<TItem>(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
+    public static Criteria<TItem> Or<TItem>(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
     {
         return new Alternative<TItem>(firstCriteria, secondCriteria);
     }
 
-    public static Conjunction<TItem> And<TItem>(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
+    public static Criteria<TItem> And<TItem>(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
     {
         return new Conjunction<TItem>(firstCriteria, secondCriteria);
     }
