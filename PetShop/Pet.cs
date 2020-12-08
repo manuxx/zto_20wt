@@ -102,6 +102,7 @@ namespace Training.DomainClasses
                 return item.yearOfBirth > _year;
             }
         }
+
     }
 
     public class Negation<TItem> : Criteria<TItem>
@@ -110,7 +111,11 @@ namespace Training.DomainClasses
 
         public Negation(Criteria<TItem> criteria4negation)
         {
+<<<<<<< Updated upstream:PetShop/Pet.cs
             _criteria4Negation = criteria4negation;
+=======
+            _criteriaForNegation = criteriaForNegation;
+>>>>>>> Stashed changes:PetShop/TItem.cs
         }
 
         public bool IsSatisfiedBy(TItem item)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Training.DomainClasses
 {
@@ -50,15 +51,25 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
+<<<<<<< Updated upstream
                 _petsInTheStore.ThatSatisfy(new Alternative(Pet.IsASpecies(Species.Dog),  Pet.IsASpecies(Species.Cat)));
+=======
+                _petsInTheStore.ThatSatisfy(new Alternative(TItem.IsASpecies(Species.Dog),  TItem.IsASpecies(Species.Cat)));
+
+>>>>>>> Stashed changes
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
+<<<<<<< Updated upstream
                 _petsInTheStore.ThatSatisfy(new Negation<Pet>(Pet.IsASpecies(Species.Mouse)));
+=======
+
+                _petsInTheStore.ThatSatisfy(new Negation<TItem>(TItem.IsASpecies(Species.Mouse)));
+>>>>>>> Stashed changes
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Dog && pet.sex == Sex.Male));
+                _petsInTheStore.ThatSatisfy(new Conjunction<TItem>(TItem.IsASpecies(Species.Dog), new Negation<TItem>(TItem.IsFemale())));
 
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
@@ -71,4 +82,40 @@ namespace Training.DomainClasses
 
     }
 
+<<<<<<< Updated upstream
+=======
+    public class Conjunction<T> : Criteria<TItem>
+    {
+        private Criteria<TItem> _criteria1;
+        private Criteria<TItem> _criteria2;
+
+        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
+        {
+            _criteria2 = criteria2;
+            _criteria1 = criteria1;
+        }
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return _criteria1.IsSatisfiedBy(item) && _criteria2.IsSatisfiedBy(item);
+        }
+    }
+
+    public class Alternative : Criteria<TItem>
+    {
+        private Criteria<TItem> _criteria1;
+        private Criteria<TItem> _criteria2;
+
+        public Alternative(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
+        {
+            _criteria2 = criteria2;
+            _criteria1 = criteria1;
+        }
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return _criteria1.IsSatisfiedBy(item) || _criteria2.IsSatisfiedBy(item);
+        }
+    }
+>>>>>>> Stashed changes
 }
