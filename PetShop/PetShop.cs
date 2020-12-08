@@ -50,7 +50,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsASpecies(Species.Dog),  Pet.IsASpecies(Species.Cat)));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).And(Pet.IsASpecies(Species.Cat)));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
@@ -108,6 +108,14 @@ namespace Training.DomainClasses
             }
 
             return false;
+        }
+    }
+
+    public static class CriteriaExtensions
+    {
+        public static Criteria<T> And<T>(this Criteria<T> criteria, Criteria<T> other)
+        {
+            return new Alternative<T>(criteria, other);
         }
     }
 }
