@@ -23,4 +23,5 @@ okulski+
 
 
 lab 4:
-szretter+
+szretter++
+beresniewicz++
