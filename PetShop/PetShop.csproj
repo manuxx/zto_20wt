@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Alternative.cs" />
     <Compile Include="AnonymousCriteria.cs" />
+    <Compile Include="BinaryCriteria.cs" />
     <Compile Include="Conjunction.cs" />
     <Compile Include="Criteria.cs" />
     <Compile Include="CriteriaExtensions.cs" />
