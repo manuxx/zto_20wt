@@ -6,6 +6,11 @@ okulski+
 FROELKE+
 MALECKI+
 
+zygula+
+hajdasz+
+bersniewicz+
+kostrzebski+
+malecki+
 
 lab3:
 beresniewicz+
@@ -15,3 +20,4 @@ kostrzebski++
 KArcz+
 fudela+
 okulski+
+
