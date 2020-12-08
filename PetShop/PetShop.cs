@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Training.DomainClasses
 {
@@ -28,7 +29,7 @@ namespace Training.DomainClasses
         public IEnumerable<Pet> AllPetsSortedByName()
         {
             List<Pet> sortedPets = new List<Pet>(_petsInTheStore);
-            sortedPets.Sort((p1,p2) => p1.name.CompareTo(p2.name));
+            sortedPets.Sort((p1, p2) => p1.name.CompareTo(p2.name));
             return sortedPets;
         }
 
@@ -50,7 +51,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Alternative(Pet.IsASpecies(Species.Dog),  Pet.IsASpecies(Species.Cat)));
+                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsASpecies(Species.Cat)));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
@@ -71,4 +72,26 @@ namespace Training.DomainClasses
 
     }
 
+    public class Alternative<TItem> : Criteria<TItem>
+    {
+        private readonly IEnumerable<Criteria<TItem>> _criterias;
+
+
+        public Alternative(params Criteria<TItem>[] criterias)
+        {
+            _criterias = criterias.AsEnumerable();
+        }
+
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            foreach (var criteria in _criterias)
+            {
+                if (criteria.IsSatisfiedBy(item))
+                    return true;
+            }
+
+            return false;
+        }
+    }
 }
