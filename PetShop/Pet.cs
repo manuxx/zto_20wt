@@ -2,7 +2,7 @@ using System;
 
 namespace Training.DomainClasses
 {
-    public class Pet : IEquatable<Pet>
+    public partial class Pet : IEquatable<Pet>
     {
         public bool Equals(Pet other)
         {
@@ -55,41 +55,14 @@ namespace Training.DomainClasses
             return new SexCriteria(Sex.Female);
         }
 
+        public static Criteria<Pet> IsMale()
+        {
+            return new SexCriteria(Sex.Male);
+        }
+
         public static Criteria<Pet> IsNotASpecies(Species species)
         {
             return new Negation<Pet>(IsASpecies(species));
-        }
-
-        public class Negation<TItem> : Criteria<TItem>
-        {
-            private readonly Criteria<TItem> _criteria4negation;
-
-            public Negation(Criteria<TItem> criteria4negation)
-            {
-                _criteria4negation = criteria4negation;
-            }
-
-            public bool IsSatisfiedBy(TItem item)
-            {
-                return !_criteria4negation.IsSatisfiedBy(item);
-            }
-        }
-
-        public class Alternative<TItem> : Criteria<TItem>
-        {
-            private readonly Criteria<TItem> _firstcriteria;
-            private readonly Criteria<TItem> _secondcriteria;
-
-            public Alternative(Criteria<TItem> firstcriteria, Criteria<TItem> secondcriteria)
-            {
-                _firstcriteria = firstcriteria;
-                _secondcriteria = secondcriteria;
-            }
-
-            public bool IsSatisfiedBy(TItem item)
-            {
-                return _firstcriteria.IsSatisfiedBy(item)||_secondcriteria.IsSatisfiedBy(item);
-            }
         }
 
         public class SpeciesCriteria : Criteria<Pet>
