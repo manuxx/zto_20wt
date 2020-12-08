@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Training.DomainClasses
 {
-    public class PetShop
+    public partial class PetShop
     {
         private IList<Pet> _petsInTheStore;
 
@@ -50,7 +50,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsASpecies(Species.Cat)));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).Or(Pet.IsASpecies(Species.Cat)));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
@@ -58,34 +58,16 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.species == Species.Dog && pet.sex == Sex.Male));
+                _petsInTheStore.ThatSatisfy((Pet.IsASpecies(Species.Dog).And(Pet.IsMale())));
 
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog));
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2010).And(Pet.IsASpecies(Species.Dog)));
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2011).Or(Pet.IsASpecies(Species.Rabbit)));
 
-    }
-
-    public class Alternative<TItem> : Criteria<TItem>
-    {
-        private readonly Criteria<TItem> _firstCriteria;
-        private readonly Criteria<TItem> _secondCriteria;
-
-        public Alternative(Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
-        {
-            _firstCriteria = firstCriteria;
-            _secondCriteria = secondCriteria;
-        }
-
-
-        public bool IsSatisfiedBy(TItem item)
-        {
-            return _firstCriteria.IsSatisfiedBy(item) || _secondCriteria.IsSatisfiedBy(item);
-        }
     }
 }

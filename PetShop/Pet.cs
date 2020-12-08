@@ -55,6 +55,11 @@ namespace Training.DomainClasses
             return new SexCriteria(Sex.Female);
         }
 
+        public static Criteria<Pet> IsMale()
+        {
+            return new SexCriteria(Sex.Male);
+        }
+
         public static Criteria<Pet> IsNotASpecies(Species species)
         {
             return new Negation<Pet>(IsASpecies(species));
@@ -101,21 +106,6 @@ namespace Training.DomainClasses
             {
                 return item.yearOfBirth > _year;
             }
-        }
-    }
-
-    public class Negation<TItem> : Criteria<TItem>
-    {
-        private readonly Criteria<TItem> _criteria;
-
-        public Negation(Criteria<TItem> criteria)
-        {
-            _criteria = criteria;
-        }
-
-        public bool IsSatisfiedBy(TItem item)
-        {
-            return !_criteria.IsSatisfiedBy(item);
         }
     }
 }
