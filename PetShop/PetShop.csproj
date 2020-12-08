@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnonymousCriteria.cs" />
+    <Compile Include="CompositeCriteria.cs" />
     <Compile Include="Criteria.cs" />
     <Compile Include="EnviromentType.cs" />
     <Compile Include="Pet.cs" />

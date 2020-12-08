@@ -58,7 +58,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy( new Conjunction<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsMale()));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).And(Pet.IsMale()));
 
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
@@ -66,59 +66,8 @@ namespace Training.DomainClasses
                 _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2010).And(Pet.IsASpecies(Species.Dog)));
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
-            =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
+            => 
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2011).Or(Pet.IsASpecies(Species.Rabbit)));
 
-    }
-
-    public class Conjunction<T> : CompositeCriteria<T>
-    {
-        public Conjunction(Criteria<T> left, Criteria<T> right) : base(left, right)
-        {
-        }
-
-        public override bool IsSatisfiedBy(T subject)
-        {
-            return _left.IsSatisfiedBy(subject) && _right.IsSatisfiedBy(subject);
-        }
-    }
-
-    public abstract class CompositeCriteria<T> : Criteria<T>
-    {
-        protected Criteria<T> _left;
-        protected Criteria<T> _right;
-
-        protected CompositeCriteria(Criteria<T> left, Criteria<T> right)
-        {
-            _left = left;
-            _right = right;
-        }
-
-        public abstract bool IsSatisfiedBy(T subject);
-    }
-
-    public class Alternative<T> : CompositeCriteria<T>
-    {
-        public Alternative(Criteria<T> left, Criteria<T> right) : base(left, right)
-        {
-        }
-        
-        public override bool IsSatisfiedBy(T subject)
-        {
-            return _left.IsSatisfiedBy(subject) || _right.IsSatisfiedBy(subject);
-        }
-    }
-
-    public static class CriteriaExtensions
-    {
-        public static Criteria<T> And<T>(this Criteria<T> criteria, Criteria<T> other)
-        {
-            return new Conjunction<T>(criteria, other);
-        }
-        
-        public static Criteria<T> Or<T>(this Criteria<T> criteria, Criteria<T> other)
-        {
-            return new Alternative<T>(criteria, other);
-        }
     }
 }
