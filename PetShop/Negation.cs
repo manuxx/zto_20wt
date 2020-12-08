@@ -1,7 +1,6 @@
 namespace Training.DomainClasses
 {
-    public partial class Pet
-    {
+
         public class Negation<TItem> : Criteria<TItem>
         {
             private readonly Criteria<TItem> _criteria4negation;
@@ -16,5 +15,4 @@ namespace Training.DomainClasses
                 return !_criteria4negation.IsSatisfiedBy(item);
             }
         }
-    }
 }
