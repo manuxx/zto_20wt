@@ -4,6 +4,7 @@ using PetShopSpec.Utilities;
 using Training.DomainClasses;
 using Machine.Specifications;
 using Machine.Specifications.AutoMocking.Rhino;
+using NUnit.Framework.Constraints;
 
 namespace Training.Spec
 {
@@ -204,7 +205,7 @@ namespace Training.Spec
         };
         private It should_be_able_to_find_all_mice = () =>
         {
-            var criteria = Where<Pet>.hasAn(p => p.species).EqualTo(Species.Mouse);
+            var criteria = Where<Pet>.HasAn(p => p.species).EqualTo(Species.Mouse);
             var foundPets = subject.AllPets().ThatSatisfy(criteria);
             foundPets.ShouldContainOnly(mouse_Dixie, mouse_Jerry);
         };

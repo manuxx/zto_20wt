@@ -54,6 +54,7 @@
     <Compile Include="ReadOnly.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="Sex.cs" />
+    <Compile Include="Where.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
