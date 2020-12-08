@@ -3,23 +3,6 @@ using Training.DomainClasses;
 
 namespace Training.DomainClasses
 {
-    public class Conjunction<TItem> : Criteria<TItem>
-    {
-        private readonly Criteria<TItem> m_criteria1;
-        private readonly Criteria<TItem> m_criteria2;
-
-        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
-        {
-            m_criteria1 = criteria1;
-            m_criteria2 = criteria2;
-        }
-
-        public bool IsSatisfiedBy(TItem item)
-        {
-            return m_criteria1.IsSatisfiedBy(item) && m_criteria2.IsSatisfiedBy(item);
-        }
-    }
-
     public class Negation<TItem> : Criteria<TItem>
     {
         private readonly Criteria<TItem> _criteria4Negation;
@@ -35,18 +18,39 @@ namespace Training.DomainClasses
         }
     }
 
-    public class Alternative<TItem> : Criteria<TItem>
+    public abstract class BinaryCriteria<TItem> : Criteria<TItem>
     {
-        private readonly Criteria<TItem> m_criterion1;
-        private readonly Criteria<TItem> m_criterion2;
+        protected Criteria<TItem> m_criterion1;
+        protected Criteria<TItem> m_criterion2;
 
-        public Alternative(Criteria<TItem> criterion1, Criteria<TItem> criterion2)
+        protected BinaryCriteria(Criteria<TItem> criterion1, Criteria<TItem> criterion2)
         {
             m_criterion1 = criterion1;
             m_criterion2 = criterion2;
         }
 
-        public bool IsSatisfiedBy(TItem item)
+        public abstract bool IsSatisfiedBy(TItem item);
+    }
+
+    public class Conjunction<TItem> : BinaryCriteria<TItem>
+    {
+        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2) : base(criteria1, criteria2)
+        {
+        }
+
+        public override bool IsSatisfiedBy(TItem item)
+        {
+            return m_criterion1.IsSatisfiedBy(item) && m_criterion2.IsSatisfiedBy(item);
+        }
+    }
+
+    public class Alternative<TItem> : BinaryCriteria<TItem>
+    {
+        public Alternative(Criteria<TItem> criterion1, Criteria<TItem> criterion2) : base(criterion1, criterion2)
+        {
+        }
+
+        public override bool IsSatisfiedBy(TItem item)
         {
             return m_criterion1.IsSatisfiedBy(item) || m_criterion2.IsSatisfiedBy(item);
         }
