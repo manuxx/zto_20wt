@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AnonymousCriteria.cs" />
     <Compile Include="Criteria.cs" />
+    <Compile Include="CriteroaOperators.cs" />
     <Compile Include="EnviromentType.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetShop.cs" />
