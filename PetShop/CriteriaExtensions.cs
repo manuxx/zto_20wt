@@ -7,9 +7,9 @@ namespace Training.DomainClasses
             return new Conjunction<TItem>(leftCriteria, rightCriteria);
         }
 
-        public static Alternative<Pet> Or(this Criteria<Pet> leftCritera, Criteria<Pet> rightCriteria)
+        public static Criteria<TItem> Or<TItem>(this Criteria<TItem> leftCritera, Criteria<TItem> rightCriteria)
         {
-            return new Alternative<Pet>(leftCritera,  rightCriteria);
+            return new Alternative<TItem>(leftCritera,  rightCriteria);
         }
     }
 }
