@@ -1,13 +1,16 @@
-﻿public class Negation<TItem> : Criteria<TItem>
+﻿namespace Training.DomainClasses
 {
-    private readonly Criteria<TItem> _criteria;
-    public Negation(Criteria<TItem> criteria)
+    public class Negation<TItem> : Criteria<TItem>
     {
-        _criteria = criteria;
-    }
+        private readonly Criteria<TItem> _criteria;
+        public Negation(Criteria<TItem> criteria)
+        {
+            _criteria = criteria;
+        }
 
-    public bool IsSatisfiedBy(TItem item)
-    {
-        return !_criteria.IsSatisfiedBy(item);
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return !_criteria.IsSatisfiedBy(item);
+        }
     }
 }
