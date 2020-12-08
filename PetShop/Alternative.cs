@@ -21,4 +21,12 @@ namespace Training.DomainClasses
             return false;
         }
     }
+
+    public static class OrCriteriaExtension
+    {
+        public static Criteria<T> Or<T>(this Criteria<T> leftCriteria, Criteria<T> rightCriteria)
+        {
+            return new Alternative<T>(leftCriteria, rightCriteria);
+        }
+    }
 }
