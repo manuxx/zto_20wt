@@ -13,4 +13,9 @@ public static class CriteriaExtensions
     {
         return new Conjunction<TItem>(lhsCriteria, rhsCriteria);
     }
+
+    public static Criteria<TItem> Or<TItem>(this Criteria<TItem> lhsCriteria, Criteria<TItem> rhsCriteria)
+    {
+        return new Alternative<TItem>(lhsCriteria, rhsCriteria);
+    }
 }
