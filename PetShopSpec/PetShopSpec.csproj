@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Machine.Specifications.0.12.0\lib\net45\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Machine.Specifications.1.0.0\lib\net45\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Machine.Specifications.AutoMocking, Version=1.5.10.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Machine.Specifications.AutoMocking.1.5.10.2\lib\Machine.Specifications.AutoMocking.dll</HintPath>
