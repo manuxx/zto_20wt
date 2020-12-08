@@ -104,5 +104,18 @@ namespace Training.DomainClasses
         }
     }
 
-    
+    public class Negation<TItem> : Criteria<TItem>
+    {
+        private readonly Criteria<TItem> _criteria4negation;
+
+        public Negation(Criteria<TItem> criteria4Negation)
+        {
+            _criteria4negation = criteria4Negation;
+        }
+
+        public bool IsSatisfiedBy(TItem pet)
+        {
+            return !_criteria4negation.IsSatisfiedBy(pet);
+        }
+    }
 }
