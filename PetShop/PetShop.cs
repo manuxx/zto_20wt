@@ -50,7 +50,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).And(Pet.IsASpecies(Species.Cat)));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).Or(Pet.IsASpecies(Species.Cat)));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
@@ -63,7 +63,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
-                _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2010 && pet.species == Species.Dog));
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2010).And(Pet.IsASpecies(Species.Dog)));
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             =>
@@ -71,20 +71,20 @@ namespace Training.DomainClasses
 
     }
 
-    public class Conjunction<T> : Criteria<Pet>
+    public class Conjunction<T> : Criteria<T>
     {
-        private readonly Criteria<Pet> _criteria;
-        private readonly Criteria<Pet> _otherCriteria;
+        private readonly Criteria<T> _criteria;
+        private readonly Criteria<T> _otherCriteria;
 
-        public Conjunction(Criteria<Pet> criteria, Criteria<Pet> otherCriteria)
+        public Conjunction(Criteria<T> criteria, Criteria<T> otherCriteria)
         {
             _criteria = criteria;
             _otherCriteria = otherCriteria;
         }
 
-        public bool IsSatisfiedBy(Pet pet)
+        public bool IsSatisfiedBy(T subject)
         {
-            return _criteria.IsSatisfiedBy(pet) && _otherCriteria.IsSatisfiedBy(pet);
+            return _criteria.IsSatisfiedBy(subject) && _otherCriteria.IsSatisfiedBy(subject);
         }
     }
 
@@ -114,6 +114,11 @@ namespace Training.DomainClasses
     public static class CriteriaExtensions
     {
         public static Criteria<T> And<T>(this Criteria<T> criteria, Criteria<T> other)
+        {
+            return new Conjunction<T>(criteria, other);
+        }
+        
+        public static Criteria<T> Or<T>(this Criteria<T> criteria, Criteria<T> other)
         {
             return new Alternative<T>(criteria, other);
         }
