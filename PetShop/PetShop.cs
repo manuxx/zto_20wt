@@ -70,5 +70,4 @@ namespace Training.DomainClasses
                 _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
 
     }
-
 }
