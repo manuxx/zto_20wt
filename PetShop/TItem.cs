@@ -2,9 +2,9 @@ using System;
 
 namespace Training.DomainClasses
 {
-    public class Pet : IEquatable<Pet>
+    public class TItem : IEquatable<TItem>
     {
-        public bool Equals(Pet other)
+        public bool Equals(TItem other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -16,7 +16,7 @@ namespace Training.DomainClasses
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Pet) obj);
+            return Equals((TItem) obj);
         }
 
         public override int GetHashCode()
@@ -24,12 +24,12 @@ namespace Training.DomainClasses
             return (name != null ? name.GetHashCode() : 0);
         }
 
-        public static bool operator ==(Pet left, Pet right)
+        public static bool operator ==(TItem left, TItem right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Pet left, Pet right)
+        public static bool operator !=(TItem left, TItem right)
         {
             return !Equals(left, right);
         }
@@ -40,22 +40,22 @@ namespace Training.DomainClasses
         public float price { get; set; }
         public Species species { get; set; }
 
-        public static Criteria<Pet> IsASpecies(Species species)
+        public static Criteria<TItem> IsASpecies(Species species)
         {
             return new SpeciesCriteria(species);
         }
 
-        public static Criteria<Pet> IsBornAfter(int year)
+        public static Criteria<TItem> IsBornAfter(int year)
         {
             return new BornAfterYearCriteria(year);
         }
 
-        public static Criteria<Pet> IsFemale()
+        public static Criteria<TItem> IsFemale()
         {
             return new SexCriteria(Sex.Female);
         }
 
-        public class SpeciesCriteria : Criteria<Pet>
+        public class SpeciesCriteria : Criteria<TItem>
         {
             private readonly Species _species;
 
@@ -64,12 +64,12 @@ namespace Training.DomainClasses
                 _species = species;
             }
 
-            public bool IsSatisfiedBy(Pet pet)
+            public bool IsSatisfiedBy(TItem item)
             {
-                return pet.species == _species;
+                return item.species == _species;
             }
         }
-        public class SexCriteria : Criteria<Pet>
+        public class SexCriteria : Criteria<TItem>
         {
             private readonly Sex _sex;
 
@@ -78,12 +78,12 @@ namespace Training.DomainClasses
                 _sex = sex;
             }
 
-            public bool IsSatisfiedBy(Pet item)
+            public bool IsSatisfiedBy(TItem item)
             {
                 return item.sex == _sex;
             }
         }
-        public class BornAfterYearCriteria : Criteria<Pet>
+        public class BornAfterYearCriteria : Criteria<TItem>
         {
             private readonly int _year;
 
@@ -92,13 +92,13 @@ namespace Training.DomainClasses
                 _year = year;
             }
 
-            public bool IsSatisfiedBy(Pet item)
+            public bool IsSatisfiedBy(TItem item)
             {
                 return item.yearOfBirth > _year;
             }
         }
 
-        public static Criteria<Pet> IsMale()
+        public static Criteria<TItem> IsMale()
         {
             return new SexCriteria(Sex.Male); 
         }
