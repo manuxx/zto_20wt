@@ -118,4 +118,19 @@ namespace Training.DomainClasses
             return ! _criteria4Negation.IsSatisfiedBy(item);
         }
     }
+
+    public class Alternative<TItem> : Criteria<TItem>
+    {
+        public readonly Criteria<TItem> _crieteria1;
+        public readonly Criteria<TItem> _crieteria2;
+        public Alternative(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
+        {
+            _crieteria1 = criteria1;
+            _crieteria2 = criteria2;
+        }
+        public bool IsSatisfiedBy(TItem pet)
+        {
+            return _crieteria1.IsSatisfiedBy(pet) || _crieteria2.IsSatisfiedBy(pet);
+        }
+    }
 }

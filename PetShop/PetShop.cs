@@ -70,19 +70,4 @@ namespace Training.DomainClasses
                 _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
 
     }
-
-    public class Alternative : Criteria<Pet>
-    {
-        public readonly Criteria<Pet> _crieteria1;
-        public readonly Criteria<Pet> _crieteria2;
-        public Alternative(Criteria<Pet> criteria1, Criteria<Pet> criteria2)
-        {
-            _crieteria1 = criteria1;
-            _crieteria2 = criteria2;
-        }
-        public bool IsSatisfiedBy(Pet pet)
-        {
-            return _crieteria1.IsSatisfiedBy(pet) || _crieteria2.IsSatisfiedBy(pet);
-        }
-    }
 }
