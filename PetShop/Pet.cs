@@ -108,14 +108,14 @@ namespace Training.DomainClasses
     {
         private readonly Criteria<TItem> _criteria4Negation;
 
-        public Negation(Criteria<TItem> criteria4Negation)
+        public Negation(Criteria<TItem> criteria4negation)
         {
-            _criteria4Negation = criteria4Negation;
+            _criteria4Negation = criteria4negation;
         }
 
-        public bool IsSatisfiedBy(TItem criteria)
+        public bool IsSatisfiedBy(TItem item)
         {
-            return !_criteria4Negation.IsSatisfiedBy(criteria);
+            return ! _criteria4Negation.IsSatisfiedBy(item);
         }
     }
 }
