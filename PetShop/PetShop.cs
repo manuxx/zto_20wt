@@ -54,7 +54,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
-                _petsInTheStore.ThatSatisfy(Pet.IsNotASpecies(Species.Mouse));
+                _petsInTheStore.ThatSatisfy(new Negation<Pet>(Pet.IsASpecies(Species.Mouse)));
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
