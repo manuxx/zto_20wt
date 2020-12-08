@@ -66,7 +66,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             =>
-                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsBornAfter(2011), Pet.IsASpecies(Species.Rabbit)));
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2011).Or(Pet.IsASpecies(Species.Rabbit)));
 
     }
 }

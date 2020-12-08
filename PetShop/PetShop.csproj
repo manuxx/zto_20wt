@@ -43,7 +43,7 @@
     <Compile Include="BinaryCriteria.cs" />
     <Compile Include="Criteria.cs" />
     <Compile Include="CriteriaExtensions.cs" />
-    <Compile Include="CriteroaOperators.cs" />
+    <Compile Include="CriteriaOperators.cs" />
     <Compile Include="EnviromentType.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="PetShop.cs" />
