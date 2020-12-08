@@ -1,4 +1,6 @@
-﻿namespace Training.DomainClasses
+﻿using System;
+
+namespace Training.DomainClasses
 {
     public class Conjunction<TItem> : Criteria<TItem>
     {
