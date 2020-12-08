@@ -1,4 +1,4 @@
 public interface Criteria<T>
 {
-    bool IsSatisfiedBy(T pet);
+    bool IsSatisfiedBy(T item);
 }

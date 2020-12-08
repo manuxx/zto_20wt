@@ -9,8 +9,8 @@ public class AnonymousCriteria<T> : Criteria<T>
         _predicate = predicate;
     }
 
-    public bool IsSatisfiedBy(T pet)
+    public bool IsSatisfiedBy(T item)
     {
-        return _predicate(pet);
+        return _predicate(item);
     }
 }

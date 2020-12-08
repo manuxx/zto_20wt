@@ -64,9 +64,9 @@ namespace Training.DomainClasses
                 _species = species;
             }
 
-            public bool IsSatisfiedBy(Pet pet)
+            public bool IsSatisfiedBy(Pet item)
             {
-                return pet.species == _species;
+                return item.species == _species;
             }
         }
         public class SexCriteria : Criteria<Pet>
@@ -108,9 +108,9 @@ namespace Training.DomainClasses
             _criteria4negation = criteria4Negation;
         }
 
-        public bool IsSatisfiedBy(TItem pet)
+        public bool IsSatisfiedBy(TItem item)
         {
-            return !_criteria4negation.IsSatisfiedBy(pet);
+            return !_criteria4negation.IsSatisfiedBy(item);
         }
     }
 }
