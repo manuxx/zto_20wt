@@ -21,3 +21,6 @@ KArcz+
 fudela+
 okulski+
 
+
+lab 4:
+szretter+
