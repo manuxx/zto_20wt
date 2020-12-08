@@ -49,7 +49,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCatsOrDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsASpecies(Species.Cat)));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).Or(Pet.IsASpecies(Species.Cat)));
 
         public IEnumerable<Pet> AllPetsButNotMice()
             =>
@@ -57,14 +57,14 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMaleDogs()
             =>
-                _petsInTheStore.ThatSatisfy(new Conjunction<Pet>(Pet.IsASpecies(Species.Dog), Pet.IsMale()));
+                _petsInTheStore.ThatSatisfy(Pet.IsASpecies(Species.Dog).And(Pet.IsMale()));
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
             =>
-                _petsInTheStore.ThatSatisfy(new Conjunction<Pet>(Pet.IsBornAfter(2010), Pet.IsASpecies(Species.Dog)));
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2010).And(Pet.IsASpecies(Species.Dog)));
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
             =>
-                _petsInTheStore.ThatSatisfy(new Alternative<Pet>(Pet.IsBornAfter(2011), Pet.IsASpecies(Species.Rabbit)));
+                _petsInTheStore.ThatSatisfy(Pet.IsBornAfter(2011).Or(Pet.IsASpecies(Species.Rabbit)));
     }
 }

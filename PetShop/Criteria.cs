@@ -1,3 +1,6 @@
+using System;
+using Training.DomainClasses;
+
 namespace Training.DomainClasses
 {
     public class Conjunction<TItem> : Criteria<TItem>
@@ -50,7 +53,20 @@ namespace Training.DomainClasses
     }
 }
 
-public interface Criteria<T>
+public interface Criteria<TItem>
 {
-    bool IsSatisfiedBy(T pet);
+    bool IsSatisfiedBy(TItem item);
+}
+
+public static class CriteriaExtensions
+{
+    public static Alternative<TItem> Or<TItem>(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
+    {
+        return new Alternative<TItem>(firstCriteria, secondCriteria);
+    }
+
+    public static Conjunction<TItem> And<TItem>(this Criteria<TItem> firstCriteria, Criteria<TItem> secondCriteria)
+    {
+        return new Conjunction<TItem>(firstCriteria, secondCriteria);
+    }
 }
