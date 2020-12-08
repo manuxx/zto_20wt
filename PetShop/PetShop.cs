@@ -70,12 +70,4 @@ namespace Training.DomainClasses
                 _petsInTheStore.ThatSatisfy((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
 
     }
-
-    public static class CriteriaExtensions
-    {
-        public static Criteria<TItem> And<TItem>(this Criteria<TItem> criteria, Criteria<TItem> other)
-        {
-            return new Conjunction<TItem>(criteria, other);
-        }
-    }
 }
