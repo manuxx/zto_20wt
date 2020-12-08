@@ -2,18 +2,23 @@ namespace Training.DomainClasses
 {
     public class Conjunction<TItem> : Criteria<TItem>
     {
-        private readonly Criteria<TItem> _criteria1;
-        private readonly Criteria<TItem> _criteria2;
+        private readonly Criteria<TItem>[] _criterias;
 
-        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
+
+        public Conjunction(params Criteria<TItem>[] criterias)
         {
-            _criteria1 = criteria1;
-            _criteria2 = criteria2;
+            _criterias = criterias;
         }
 
         public bool IsSatisfiedBy(TItem item)
         {
-            return _criteria1.IsSatisfiedBy(item) && _criteria2.IsSatisfiedBy(item);
+            foreach (var criteria in _criterias)
+            {
+                if (!criteria.IsSatisfiedBy(item))
+                    return false;
+            }
+
+            return true;
         }
     }
 }
